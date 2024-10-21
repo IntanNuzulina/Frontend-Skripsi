@@ -1,18 +1,20 @@
 import Card from "@/components/card";
 import Title from "@/components/title";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
-import axios from "axios";
 import Link from "next/link";
 import { BASE_URL } from "@/utils/config";
 
 export default async function Products() {
-  // const products = data;
-  const products = await axios.get(BASE_URL + "/buku/view?latest");
+  const res = await fetch(BASE_URL + "/buku/view?latest", {
+    next: { revalidate: 60 },
+  });
+  const resJson = await res.json();
+  const products = resJson;
   return (
     <div className="mt-10 mx-8">
       <Title name={"Our Books"} sub={"Our Products"} />
       <div className="flex mt-3">
-        {products.data.data.map((product, index) => (
+        {products.data.map((product, index) => (
           <>
             {index < 6 && (
               <>
