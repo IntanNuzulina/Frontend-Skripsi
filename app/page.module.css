@@ -1,0 +1,34 @@
+.mySwiper {
+  width: 100vw; /* Full width of viewport */
+  height: 100vh; /* Full height of viewport */
+}
+
+.mySwiperSlide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 30px; /* Adjust the width of the navigation buttons */
+  height: 30px; /* Adjust the height of the navigation buttons */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Add a background color for better visibility */
+  border-radius: 50%; /* Make the buttons round */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 12px; /* Adjust the size of the arrow icons */
+}

@@ -1,0 +1,43 @@
+/* .myTitleClass {
+  color: #1e3a8a; 
+.myContentClass {
+  color: #6c757d; 
+  font-size: 16px;
+}
+
+.myConfirmButtonClass {
+  background-color: #1e3a8a; 
+  color: white;
+  border-radius: 5px;  */
+
+.myTitleClass {
+  color: #28a745; /* Warna hijau untuk judul */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.myContentClass {
+  color: #343a40; /* Warna abu-abu untuk konten */
+  font-size: 16px;
+}
+
+.myConfirmButtonClass {
+  background-color: #1e3a8a; /* Warna biru untuk tombol */
+  color: white;
+  border-radius: 5px;
+}
+
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-border {
+  background: linear-gradient(90deg, red, blue);
+  background-size: 200% 200%; /* Pastikan background-size mencakup seluruh area */
+  animation: borderMove 4s linear infinite; /* Animasi akan berjalan terus-menerus */
+}
