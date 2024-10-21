@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import {
   FaBook,
   FaRegUserCircle,
@@ -9,12 +7,12 @@ import {
 import Sidebar from "./sidebar";
 
 export default async function Page() {
-  const responseBooks = await fetch("http://localhost:8000/api/buku/view");
-  const responseUsers = await fetch("http://localhost:8000/api/users");
-  const dataUsers = await responseUsers.json();
-  const dataBooks = await responseBooks.json();
-  const users = dataUsers;
-  const books = dataBooks.data;
+  // const responseBooks = await fetch("http://localhost:8000/api/buku/view");
+  // const responseUsers = await fetch("http://localhost:8000/api/users");
+  // const dataUsers = await responseUsers.json();
+  // const dataBooks = await responseBooks.json();
+  // const users = dataUsers;
+  // const books = dataBooks.data;
   return (
     <div className="flex">
       <Sidebar />
@@ -37,7 +35,7 @@ export default async function Page() {
                   Jumlah buku
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {books.length}
+                  {/* {books.length} */}
                 </p>
               </div>
               <FaBook className="text-gray-300 text-3xl mr-3" />{" "}
@@ -51,7 +49,7 @@ export default async function Page() {
                   Users
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {users.length}
+                  {/* {users.length} */}
                 </p>
               </div>
               <FaUser className="text-gray-300 text-3xl mr-3" />{" "}
