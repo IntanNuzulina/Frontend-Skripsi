@@ -9,10 +9,12 @@ import {
 import Sidebar from "./sidebar";
 
 export default async function Page() {
-  const responseBooks = await axios.get("http://localhost:8000/api/buku/view");
-  const responseUsers = await axios.get("http://localhost:8000/api/users");
-  const users = responseUsers.data;
-  const books = responseBooks.data.data;
+  const responseBooks = await fetch("http://localhost:8000/api/buku/view");
+  const responseUsers = await fetch("http://localhost:8000/api/users");
+  const dataUsers = await responseUsers.json();
+  const dataBooks = await responseBooks.json();
+  const users = dataUsers;
+  const books = dataBooks.data;
   return (
     <div className="flex">
       <Sidebar />

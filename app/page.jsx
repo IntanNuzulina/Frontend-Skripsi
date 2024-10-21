@@ -1,5 +1,4 @@
 import Navbar from "@/components/navbar";
-import Image from "next/image";
 import Header from "./header";
 import Flashsale from "./flashsale";
 import Category from "./category";
@@ -13,10 +12,15 @@ export default async function Page() {
   let productFlashsales = null;
   let countFlashsaleProducts = null;
   try {
-    responseFlashsale = await axios.get("http://localhost:8000/api/buku/view");
+    responseFlashsale = await fetch("http://localhost:8000/api/buku/view");
 
-    flashsale = await axios.get("http://localhost:8000/api/flash-sale/view");
-    productFlashsales = responseFlashsale.data.data;
+    const responseDataFlashsale = await fetch(
+      "http://localhost:8000/api/flash-sale/view"
+    );
+    const dataFlashsale = await responseFlashsale.json();
+    productFlashsales = dataFlashsale.data;
+    const flashsaleJson = await responseDataFlashsale.json();
+    flashsale = flashsaleJson.data;
     countFlashsaleProducts = 0;
     productFlashsales.forEach((product) => {
       if (product.flashsale.tanggal_akhir !== "0000-00-00 00:00:00")
@@ -31,7 +35,7 @@ export default async function Page() {
       <Navbar />
       <Header />
       {countFlashsaleProducts > 0 && (
-        <Flashsale flashsale={flashsale.data.data[0].tanggal_akhir} />
+        <Flashsale flashsale={flashsale[0].tanggal_akhir} />
       )}
       <Category />
       <Products />

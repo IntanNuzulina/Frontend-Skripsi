@@ -5,10 +5,8 @@ import Link from "next/link";
 import Navbar from "@/components/navbar";
 
 export default async function Page() {
-  const products = await axios.get(
-    "http://localhost:8000/api/buku/view?latest"
-  );
-  // const products = data;
+  const datas = await fetch("http://localhost:8000/api/buku/view?latest");
+  const products = await datas.json();
   return (
     <>
       <Navbar />
@@ -29,7 +27,7 @@ export default async function Page() {
       </label>
       <div className="mx-auto w-[90%]">
         <div className="grid grid-cols-6">
-          {products.data.data.map((product, index) => (
+          {products.data.map((product, index) => (
             <>
               <Link href={`/books/detail/${product.id}`}>
                 <Card

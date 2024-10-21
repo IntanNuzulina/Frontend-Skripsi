@@ -4,7 +4,6 @@ import Link from "next/link";
 import { FaBook } from "react-icons/fa6";
 
 export default function CardCategory(props) {
-  console.log(props);
   return (
     <Link
       className={`w-auto h-12 border-2 text-white ${props.color} rounded-2xl flex items-center border-solid border-gray-300 transform transition-transform duration-200 hover:scale-105`}

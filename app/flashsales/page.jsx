@@ -2,12 +2,11 @@ import Card from "@/components/card";
 import axios from "axios";
 import Navbar from "@/components/navbar";
 
-export default async function Flashsale({ flashsale }) {
-  const productsFlashsale = await axios.get(
-    "http://localhost:8000/api/buku/view"
-  );
+export default async function Page({ flashsale }) {
+  const productsFlashsale = await fetch("http://localhost:8000/api/buku/view");
 
-  const products = productsFlashsale.data.data;
+  const datas = await productsFlashsale.json();
+  const products = await datas.data;
 
   return (
     <>
