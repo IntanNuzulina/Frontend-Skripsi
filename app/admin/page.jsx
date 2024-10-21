@@ -6,17 +6,17 @@ import {
 } from "react-icons/fa";
 import Sidebar from "./sidebar";
 
-async function FetchData() {
-  const resBook = await fetch("http://localhost:8000/api/buku/view");
-  const resBookJson = await resBook.json();
-  const resUser = await fetch("http://localhost:8000/api/users");
-  const resUserJson = await resUser.json();
+// async function FetchData() {
+//   const resBook = await fetch("http://localhost:8000/api/buku/view");
+//   const resBookJson = await resBook.json();
+//   const resUser = await fetch("http://localhost:8000/api/users");
+//   const resUserJson = await resUser.json();
 
-  return [resBookJson.data, resUserJson];
-}
+//   return [resBookJson.data, resUserJson];
+// }
 
 export default async function Page() {
-  const [books, users] = await FetchData();
+  // const [books, users] = await FetchData();
 
   return (
     <div className="flex">
@@ -40,7 +40,7 @@ export default async function Page() {
                   Jumlah buku
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {books.length}
+                  {/* {books.length} */}
                 </p>
               </div>
               <FaBook className="text-gray-300 text-3xl mr-3" />{" "}
@@ -54,7 +54,7 @@ export default async function Page() {
                   Users
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {users.length}
+                  {/* {users.length} */}
                 </p>
               </div>
               <FaUser className="text-gray-300 text-3xl mr-3" />{" "}
