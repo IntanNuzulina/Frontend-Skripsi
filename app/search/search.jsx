@@ -30,7 +30,8 @@ export default function SearchPage() {
         {books.length === 0 ? (
           <>
             <h1 className="text-lg ml-5 text-blue-900">
-              Pencarian :<span className="font-bold italic">"{search}"</span>
+              Pencarian :
+              <span className="font-bold italic">&quot;{search}&quot;</span>
             </h1>
             <div className="flex items-center justify-center h-[70vh]">
               <p className="text-lg  text-gray-400 italic">
@@ -42,7 +43,7 @@ export default function SearchPage() {
           <>
             <h1 className="text-lg ml-5 text-blue-900">
               Hasil Pencarian :{" "}
-              <span className="font-bold italic"> "{search}"</span>{" "}
+              <span className="font-bold italic"> &quot;{search}&quot;</span>{" "}
               <p className="mt-1 w-[350px] border-b-2 border-gray-200"></p>
             </h1>
             <div className="flex gap-4 my-3">
