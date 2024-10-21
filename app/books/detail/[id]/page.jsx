@@ -1,10 +1,13 @@
 import Navbar from "@/components/navbar";
-import axios from "axios";
 import DetailProduct from "./detail";
+import { BASE_URL } from "@/utils/config";
 
 async function fetchProduct(id) {
-  const response = await axios.get(`http://localhost:8000/api/buku/view/${id}`);
-  return response.data.data;
+  const response = await fetch(`${BASE_URL}/buku/view/${id}`, {
+    next: { revalidate: 60 },
+  });
+  const resJson = await response.json();
+  return resJson.data;
 }
 
 export default async function Page({ params }) {

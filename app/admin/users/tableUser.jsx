@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import EditModalUser from "./edit-modal";
+import { BASE_URL } from "@/utils/config";
 
 export default function TableUser() {
   const [users, setUsers] = useState([]);
@@ -16,7 +17,7 @@ export default function TableUser() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const responseUser = await axios.get("http://localhost:8000/api/users", {
+      const responseUser = await axios.get(BASE_URL + "/users", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
         },
@@ -48,14 +49,11 @@ export default function TableUser() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(
-        "http://localhost:8000/api/users/" + id,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
-          },
-        }
-      );
+      const response = await axios.delete(BASE_URL + "/users/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
+        },
+      });
       setUsers((prev) => prev.filter((data) => data.id !== id));
       alert(response.data.message);
     } catch (error) {
@@ -72,7 +70,7 @@ export default function TableUser() {
     setEditedUser({ ...editedUser, name: name, email: email });
     try {
       const response = await axios.put(
-        "http://localhost:8000/api/users/" + editedUser.id,
+        BASE_URL + "/users/" + editedUser.id,
         {
           name: editedUser.name,
           email: editedUser.email,

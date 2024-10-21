@@ -3,6 +3,7 @@
 import { SwalTopEnd } from "@/components/MySwal";
 import Navbar from "@/components/navbar";
 import { CartContext } from "@/context/cartContext";
+import { BASE_URL, IMAGE_URL } from "@/utils/config";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 
@@ -15,7 +16,7 @@ export default function Page() {
   const handleDeleteCart = async (id) => {
     try {
       const response = await axios.delete(
-        "http://localhost:8000/api/keranjang/delete/" + id,
+        BASE_URL + "/keranjang/delete/" + id,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -43,15 +44,12 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8000/api/keranjang/view",
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
-            },
-          }
-        );
+        const response = await axios.get(BASE_URL + "/keranjang/view", {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
+          },
+        });
         setCart(response.data.data);
         console.log(response.data.data);
       } catch (error) {
@@ -96,8 +94,8 @@ export default function Page() {
                     <tr key={index}>
                       <th>
                         <img
-                          src={`http://localhost:8000/storage/${item.buku.gambar}`}
-                          alt="Avatar Tailwind CSS Component"
+                          src={`${IMAGE_URL}/${item.buku.gambar}`}
+                          alt="gambar buku"
                           className="w-15 h-20 object-cover mx-auto"
                         />
                       </th>

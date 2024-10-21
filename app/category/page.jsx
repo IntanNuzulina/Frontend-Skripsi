@@ -1,12 +1,15 @@
 import CardCategory from "@/components/card-category";
 import Navbar from "@/components/navbar";
-import Title from "@/components/title";
-import axios from "axios";
+import { BASE_URL } from "@/utils/config";
 
 export default async function Category() {
   let categories = null;
   try {
-    categories = await axios.get("http://localhost:8000/api/kategori/view");
+    const res = await fetch(BASE_URL + "/kategori/view", {
+      next: { revalidate: 60 },
+    });
+    const resJson = await res.json();
+    categories = resJson;
   } catch (error) {
     console.log(error);
   }
@@ -36,7 +39,7 @@ export default async function Category() {
         <div className="flex gap-2 mt-3">
           {categories && (
             <>
-              {categories.data.data.map((category, index) => (
+              {categories?.data?.map((category, index) => (
                 <CardCategory
                   key={index}
                   color={

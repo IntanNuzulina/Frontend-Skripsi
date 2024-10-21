@@ -6,6 +6,7 @@ import useAuth from "@/hooks/useAuth";
 import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import { CartContext } from "@/context/cartContext";
+import { BASE_URL } from "@/utils/config";
 
 export default function Navbar() {
   const [activeSearch, setActiveSearch] = useState(false);
@@ -29,17 +30,12 @@ export default function Navbar() {
 
       const getCartCount = async () => {
         try {
-          const response = await axios.get(
-            "http://localhost:8000/api/keranjang/view",
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem(
-                  "alhikmah-token"
-                )}`,
-              },
-            }
-          );
+          const response = await axios.get(BASE_URL + "/keranjang/view", {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
+            },
+          });
 
           setCartCount(response.data.data.length);
         } catch (error) {

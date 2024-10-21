@@ -1,6 +1,4 @@
 "use client";
-
-import { FaBookReader } from "react-icons/fa";
 import LoginForm from "./login-form";
 import Navbar from "@/components/navbar";
 import { useEffect, useState } from "react";

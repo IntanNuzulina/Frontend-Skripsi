@@ -1,5 +1,6 @@
 "use client";
 import Card from "@/components/card";
+import { BASE_URL } from "@/utils/config";
 import axios from "axios";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -13,9 +14,7 @@ export default function SearchPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/api/buku/search?q=${search}`
-        );
+        const response = await axios.get(`${BASE_URL}/buku/search?q=${search}`);
         setBooks(response.data.data);
       } catch (error) {
         console.log(error);

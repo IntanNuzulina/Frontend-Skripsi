@@ -29,29 +29,5 @@ export default function Header() {
         </SwiperSlide>
       </Swiper>
     </div>
-
-    // <
-    //   className="hero h-96 bg-hero-pattern bg-contain bg-no-repeat"
-    //   style={{ backgroundImage: "url('/images/tes.png')" }}
-    // >
-    /* <div className="hero-content  flex-col lg:flex-row-reverse">
-        <img
-          src="/images/hiro.png"
-          className="max-w-sm rounded-lg h-[350px] w-auto"
-          alt="Album"
-        />
-        <div>
-          <h1 className="text-5xl font-bold text-slate-200">Al Hikmah</h1>
-          <p className="py-6 text-slate-300">
-            Halo Sobat Al Hikmah, Disini kami menyediakan berbagai macam buku.
-            Sobat bisa membeli dan memesan buku dengan mudah dan buku akan tiba
-            di rumah.
-          </p>
-          <button className="btn flex bg-red-500 hover:bg-red-600 border-none  text-white">
-            <FaShop className="text-lg" />
-            Beli Sekarang
-          </button>
-        </div>
-      </div> */
   );
 }

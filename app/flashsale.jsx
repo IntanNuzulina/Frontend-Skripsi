@@ -1,17 +1,17 @@
 import Card from "@/components/card";
 import Title from "@/components/title";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
-import data from "./dummy";
 import CountDown from "@/components/countDown";
 import Link from "next/link";
-import axios from "axios";
+import { BASE_URL } from "@/utils/config";
 
 export default async function Flashsale({ flashsale }) {
-  const productsFlashsale = await axios.get(
-    "http://localhost:8000/api/buku/view"
-  );
+  const productsFlashsale = await fetch(BASE_URL + "/buku/view", {
+    next: { revalidate: 60 },
+  });
+  const productsFlashsaleJson = await productsFlashsale.json();
 
-  const products = productsFlashsale.data.data;
+  const products = productsFlashsaleJson.data;
 
   return (
     <div className="mt-10 mx-8 border-b-2">

@@ -1,12 +1,14 @@
 import Card from "@/components/card";
-import data from "../dummy";
-import axios from "axios";
 import Link from "next/link";
 import Navbar from "@/components/navbar";
+import { BASE_URL } from "@/utils/config";
 
 export default async function Page() {
-  const datas = await fetch("http://localhost:8000/api/buku/view?latest");
-  const products = await datas.json();
+  const res = await fetch(BASE_URL + "/buku/view?latest", {
+    next: { revalidate: 60 },
+  });
+  const resJson = await res.json();
+  const products = resJson;
   return (
     <>
       <Navbar />
@@ -44,18 +46,6 @@ export default async function Page() {
           ))}
         </div>
       </div>
-
-      {/* <figure>
-            <img src={props.image} alt="Buku" className="w-full h-[250px]" />
-          </figure>
-          <div className=" h-[150px] justify-between border-1 border-red-500">
-            <h2 className="text-center text-xl font-bold my-3">
-              {props.title}
-            </h2>
-            <p className="my-0 ml-4">{props.publisher}</p>
-            <p className="my-0 ml-4"> {props.price}</p>
-            <p className="my-0 ml-4"> Stok: {props.stock}</p>
-          </div> */}
     </>
   );
 }

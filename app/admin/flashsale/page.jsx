@@ -3,6 +3,7 @@ import { use, useEffect, useState } from "react";
 import Sidebar from "../sidebar";
 import { FaRegUserCircle, FaTrashAlt, FaEdit, FaPlus } from "react-icons/fa";
 import axios from "axios";
+import { BASE_URL } from "@/utils/config";
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [flashSale, setFlashSale] = useState({});
@@ -19,7 +20,7 @@ export default function Page() {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        "http://localhost:8000/api/flash-sale/delete/" + id,
+        BASE_URL + "/flash-sale/delete/" + id,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
@@ -37,9 +38,7 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8000/api/flash-sale/view"
-        );
+        const response = await axios.get(BASE_URL + "/flash-sale/view");
         setFlashSale(response.data.data);
         setFilteredFlashSale(response.data.data);
       } catch (error) {
@@ -69,7 +68,7 @@ export default function Page() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/flash-sale/create",
+        BASE_URL + "/flash-sale/create",
         {
           diskon: diskon,
           tanggal_akhir: date,

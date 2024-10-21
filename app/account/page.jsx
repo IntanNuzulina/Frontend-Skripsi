@@ -3,12 +3,6 @@ import Link from "next/link";
 import { VscAccount } from "react-icons/vsc";
 
 export default function Page() {
-  // const { logout } = useAuth();
-  // const handleLogout = async () => {
-  //   const response = await logout();
-  //   response.status && router.push("/");
-  // };
-
   return (
     <>
       <Navbar />

@@ -1,9 +1,9 @@
 import Card from "@/components/card";
-import axios from "axios";
 import Navbar from "@/components/navbar";
+import { BASE_URL } from "@/utils/config";
 
-export default async function Page({ flashsale }) {
-  const productsFlashsale = await fetch("http://localhost:8000/api/buku/view");
+export default async function Page() {
+  const productsFlashsale = await fetch(BASE_URL + "/buku/view");
 
   const datas = await productsFlashsale.json();
   const products = await datas.data;

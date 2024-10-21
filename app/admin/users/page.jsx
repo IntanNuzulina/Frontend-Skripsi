@@ -1,8 +1,5 @@
-import axios from "axios";
 import Sidebar from "../sidebar";
 import { FaRegUserCircle } from "react-icons/fa";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { FaEdit } from "react-icons/fa";
 import TableUser from "./tableUser";
 
 export default async function Page() {

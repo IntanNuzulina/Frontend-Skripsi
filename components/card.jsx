@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import { IMAGE_URL } from "@/utils/config";
 
 export default function Card(props) {
   return (
@@ -9,7 +8,7 @@ export default function Card(props) {
       </div>
       <figure>
         <img
-          src={props.image}
+          src={`${IMAGE_URL}/${props.image}`}
           alt="Buku"
           className="w-full h-[200px] mx-4 object-cover"
         />

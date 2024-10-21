@@ -5,6 +5,7 @@ import { FaImage, FaRegUserCircle } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 import EditModalBook from "./edit-modal";
+import { BASE_URL, IMAGE_URL } from "@/utils/config";
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -35,7 +36,7 @@ export default function Page() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/buku/create",
+        BASE_URL + "/buku/create",
         {
           id_kategori: Number(valueIdCategory),
           id_flash_sales: Number(valueIdFlashsale),
@@ -85,15 +86,11 @@ export default function Page() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8000/api/buku/view?latest"
-        );
+        const response = await axios.get(BASE_URL + "/buku/view?latest");
         const responseFlashsale = await axios.get(
-          "http://localhost:8000/api/flash-sale/view"
+          BASE_URL + "/flash-sale/view"
         );
-        const responseKategori = await axios.get(
-          "http://localhost:8000/api/kategori/view"
-        );
+        const responseKategori = await axios.get(BASE_URL + "/kategori/view");
         setCategories(responseKategori.data.data);
         setProducts(response.data.data);
         setFilteredProducts(response.data.data); // Inisial data filter
@@ -147,7 +144,7 @@ export default function Page() {
       formData.append("harga", harga);
       formData.append("_method", "put");
       const response = await axios.post(
-        "http://localhost:8000/api/buku/update/" + book.id,
+        BASE_URL + "/buku/update/" + book.id,
         formData,
         {
           headers: {
@@ -159,12 +156,6 @@ export default function Page() {
       console.log(response.data);
       setRender((prev) => !prev);
       alert("berhasil update");
-      // const filteredBook = products.filter((data) => data.id === book.id);
-      // const index = products.indexOf(filteredBook[0]);
-      // const temp = products;
-      // temp[index] = response.data.data;
-      // setCategories(temp);
-      //setProducts(temp);
     } catch (error) {
       alert("Gagal update buku");
       console.log(error);
@@ -172,7 +163,6 @@ export default function Page() {
   };
 
   const handleModalEdit = (book) => {
-    // console.log(book);
     setEditedBook(book);
     setJudul(book.judul);
     setPenerbit(book.penerbit);
@@ -191,9 +181,7 @@ export default function Page() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(
-        "http://localhost:8000/api/buku/delete/" + id
-      );
+      const response = await axios.delete(BASE_URL + "/buku/delete/" + id);
       alert("berhasil menghapus Buku!");
       console.log(response.data);
       setProducts((prev) => prev.filter((data) => data.id !== id));
@@ -512,7 +500,11 @@ export default function Page() {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>
-                    <img src={product.image} alt="" className="w-16 mx-auto" />
+                    <img
+                      src={`${IMAGE_URL}/${product.image}`}
+                      alt=""
+                      className="w-16 mx-auto"
+                    />
                   </td>
                   <td>{product.judul}</td>
                   <td>{product.penerbit}</td>

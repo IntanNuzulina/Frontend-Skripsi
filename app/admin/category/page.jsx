@@ -2,10 +2,10 @@
 import { useState, useEffect, use } from "react";
 import Sidebar from "../sidebar";
 import { FaRegUserCircle, FaPlus } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
 import axios from "axios";
 import AddModalCategory from "./add-modal";
 import EditModalCategory from "./edit-modal";
+import { BASE_URL } from "@/utils/config";
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,12 +21,9 @@ export default function Page() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/kategori/create",
-        {
-          kategori,
-        }
-      );
+      const response = await axios.post(BASE_URL + "/kategori/create", {
+        kategori,
+      });
       setLoading(false);
 
       setCategories((prev) => [...prev, response.data.data]);
@@ -44,7 +41,7 @@ export default function Page() {
     e.preventDefault();
     try {
       const response = await axios.put(
-        "http://localhost:8000/api/kategori/update/" + kategori.id,
+        BASE_URL + "/kategori/update/" + kategori.id,
         {
           kategori: kategori.kategori,
         }
@@ -64,9 +61,7 @@ export default function Page() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(
-        "http://localhost:8000/api/kategori/delete/" + id
-      );
+      const response = await axios.delete(BASE_URL + "/kategori/delete/" + id);
       alert("Berhasil menghapus data!");
       setCategories((prev) => prev.filter((data) => data.id !== id));
     } catch (error) {
@@ -78,9 +73,7 @@ export default function Page() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8000/api/kategori/view"
-        );
+        const response = await axios.get(BASE_URL + "/kategori/view");
         setCategories(response.data.data);
         setFilteredCategories(response.data.data);
       } catch (error) {

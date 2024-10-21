@@ -1,14 +1,14 @@
 import Card from "@/components/card";
 import Navbar from "@/components/navbar";
-import axios from "axios";
+import { BASE_URL } from "@/utils/config";
 import Link from "next/link";
 
 export default async function KategoriPage({ params }) {
-  const data = await fetch(
-    "http://localhost:8000/api/kategori/view/" + params.id,
-    { cache: "no-store" }
-  );
-  const products = await data.json();
+  const res = await fetch(BASE_URL + "/kategori/view/" + params.id, {
+    next: { revalidate: 60 },
+  });
+  const resJson = await res.json();
+  const products = resJson;
 
   return (
     <>

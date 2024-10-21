@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/utils/config";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -11,7 +12,7 @@ const useAuth = () => {
   const login = async (username, password) => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const response = await axios.post(BASE_URL + "/login", {
         username,
         password,
       });
@@ -28,7 +29,7 @@ const useAuth = () => {
 
   const logout = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/logout", {
+      const response = await axios.get(BASE_URL + "/logout", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
         },
@@ -48,7 +49,7 @@ const useAuth = () => {
   const checkAuth = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/api/user", {
+      const response = await axios.get(BASE_URL + "/user", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
         },
@@ -70,7 +71,7 @@ const useAuth = () => {
     alamat,
   }) => {
     setLoading(true);
-    const response = await axios.post("http://localhost:8000/api/register", {
+    const response = await axios.post(BASE_URL + "/register", {
       name,
       username,
       email,

@@ -1,6 +1,8 @@
 import useAuth from "@/hooks/useAuth";
+import { BASE_URL, IMAGE_URL } from "@/utils/config";
+
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
   const [quantity, setQuantity] = useState(1);
@@ -24,14 +26,11 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
 
   const handlePayment = async () => {
     setLoading(true);
-    const response = await axios.post(
-      "http://localhost:8000/api/payment/charge",
-      {
-        amount: totalPrice,
-        email: user?.email,
-        phone: user?.phone,
-      }
-    );
+    const response = await axios.post(BASE_URL + "/payment/charge", {
+      amount: totalPrice,
+      email: user?.email,
+      phone: user?.phone,
+    });
     const token = response.data.token;
 
     setLoading(false);
@@ -82,8 +81,8 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
           <h3 className="text-xl font-semibold mb-2">{products?.judul}</h3>
           <div className="flex items-center">
             <img
-              src={"http://localhost:8000/storage/" + products?.gambar}
-              alt="Sukses Bikin Siomay"
+              src={IMAGE_URL + "/" + products?.gambar}
+              alt="GAMBAR BUKU"
               className="w-24 h-24 rounded-md mr-4"
             />
             <div className="flex flex-col">

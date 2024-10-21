@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { HiShoppingCart } from "react-icons/hi";
 import { IoBagCheck } from "react-icons/io5";
 import PurchaseDetailsPanel from "./purchaseDetailPanel";
+import { BASE_URL, IMAGE_URL } from "@/utils/config";
 
 export default function DetailProduct({ products }) {
   const [bukuId, setBukuId] = useState(products.id);
@@ -19,7 +20,7 @@ export default function DetailProduct({ products }) {
   const handleAddToCart = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/keranjang/create",
+        BASE_URL + "/keranjang/create",
         {
           buku_id: bukuId,
           qty,
@@ -51,7 +52,7 @@ export default function DetailProduct({ products }) {
     let scriptTag = document.createElement("script");
     scriptTag.src = midtransScriptUrl;
 
-    const myMidtransClientKey = "SB-Mid-client-KQ1-ErHt-ihsWFo1";
+    const myMidtransClientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY;
     scriptTag.setAttribute("data-client-key", myMidtransClientKey);
 
     document.body.appendChild(scriptTag);
@@ -65,7 +66,7 @@ export default function DetailProduct({ products }) {
       <div className="shadow-lg mt-6  ml-3 lg:ml-5 rounded-3xl lg:mb-12 mx-5">
         <div className="w-full lg:w-[700px] p-5 grid md:grid-cols-[250px_minmax(900px,_1fr)] grid-cols-1">
           <Image
-            src={"http://localhost:8000/storage/" + products.gambar}
+            src={IMAGE_URL + "/" + products.gambar}
             alt="Buku"
             width={200}
             height={100}

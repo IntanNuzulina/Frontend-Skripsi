@@ -5,11 +5,16 @@ import {
   FaUser,
 } from "react-icons/fa";
 import Sidebar from "./sidebar";
+import { BASE_URL } from "@/utils/config";
 
 async function FetchData() {
-  const resBook = await fetch("http://202.10.40.136/api/buku/view");
+  const resBook = await fetch(BASE_URL + "/buku/view", {
+    next: { revalidate: 60 },
+  });
   const resBookJson = await resBook.json();
-  const resUser = await fetch("http://202.10.40.136/api/users");
+  const resUser = await fetch(BASE_URL + "/users", {
+    next: { revalidate: 60 },
+  });
   const resUserJson = await resUser.json();
 
   return [resBookJson.data, resUserJson];
@@ -40,7 +45,7 @@ export default async function Page() {
                   Jumlah buku
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {/* {books.length} */}
+                  {books.length}
                 </p>
               </div>
               <FaBook className="text-gray-300 text-3xl mr-3" />{" "}
@@ -54,7 +59,7 @@ export default async function Page() {
                   Users
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {/* {users.length} */}
+                  {users.length}
                 </p>
               </div>
               <FaUser className="text-gray-300 text-3xl mr-3" />{" "}

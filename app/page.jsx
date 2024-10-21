@@ -4,7 +4,7 @@ import Flashsale from "./flashsale";
 import Category from "./category";
 import Products from "./products";
 import Footer from "@/components/footer";
-import axios from "axios";
+import { BASE_URL } from "@/utils/config";
 
 export default async function Page() {
   let responseFlashsale = null;
@@ -12,11 +12,9 @@ export default async function Page() {
   let productFlashsales = null;
   let countFlashsaleProducts = null;
   try {
-    responseFlashsale = await fetch("http://localhost:8000/api/buku/view");
+    responseFlashsale = await fetch(BASE_URL + "/buku/view");
 
-    const responseDataFlashsale = await fetch(
-      "http://localhost:8000/api/flash-sale/view"
-    );
+    const responseDataFlashsale = await fetch(BASE_URL + "/flash-sale/view");
     const dataFlashsale = await responseFlashsale.json();
     productFlashsales = dataFlashsale.data;
     const flashsaleJson = await responseDataFlashsale.json();

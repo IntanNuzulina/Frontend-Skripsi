@@ -1,8 +1,6 @@
 export default function EditModalCategory({
   isOpen,
   handleSubmit,
-  kategori,
-  setKategori,
   loading,
   handleModal,
   editedKategori,
