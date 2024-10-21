@@ -12,9 +12,13 @@ export default async function Page() {
   let productFlashsales = null;
   let countFlashsaleProducts = null;
   try {
-    responseFlashsale = await fetch(BASE_URL + "/buku/view");
+    responseFlashsale = await fetch(BASE_URL + "/buku/view", {
+      next: { revalidate: 60 },
+    });
 
-    const responseDataFlashsale = await fetch(BASE_URL + "/flash-sale/view");
+    const responseDataFlashsale = await fetch(BASE_URL + "/flash-sale/view", {
+      next: { revalidate: 60 },
+    });
     const dataFlashsale = await responseFlashsale.json();
     productFlashsales = dataFlashsale.data;
     const flashsaleJson = await responseDataFlashsale.json();
