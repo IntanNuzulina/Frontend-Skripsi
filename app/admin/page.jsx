@@ -7,13 +7,9 @@ import {
 import Sidebar from "./sidebar";
 
 async function FetchData() {
-  const resBook = await fetch("http://localhost:8000/api/buku/view", {
-    next: { revalidate: 60 },
-  });
+  const resBook = await fetch("http://localhost:8000/api/buku/view");
   const resBookJson = await resBook.json();
-  const resUser = await fetch("http://localhost:8000/api/users", {
-    next: { revalidate: 60 },
-  });
+  const resUser = await fetch("http://localhost:8000/api/users");
   const resUserJson = await resUser.json();
 
   return [resBookJson.data, resUserJson];
