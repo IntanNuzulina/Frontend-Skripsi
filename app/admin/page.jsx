@@ -18,14 +18,14 @@ async function FetchData() {
     const resUser = await fetch(BASE_URL + "/users", {
       next: { revalidate: 60 },
     });
-    const resOrder = await fetch(BASE_URL + "/order/view", {
-      next: { revalidate: 60 },
-    });
+    // const resOrder = await fetch(BASE_URL + "/order/view", {
+    //   next: { revalidate: 60 },
+    // });
 
     resBookJson = await resBook.json();
     resUserJson = await resUser.json();
-    resOrderJson = await resOrder.json();
-    return [resBookJson.data, resUserJson, resOrderJson.data];
+    // resOrderJson = await resOrder.json();
+    return [resBookJson.data, resUserJson];
   } catch (error) {
     console.log(error);
     return [null, null, null];
@@ -33,7 +33,7 @@ async function FetchData() {
 }
 
 export default async function Page() {
-  const [books, users, orders] = await FetchData();
+  const [books, users] = await FetchData();
 
   return (
     <div className="flex">
@@ -120,7 +120,7 @@ export default async function Page() {
               </tr>
             </thead>
             <tbody className="text-center">
-              {orders && (
+              {/* {orders && (
                 <>
                   {orders?.map((order, index) => (
                     <tr key={index}>
@@ -144,7 +144,7 @@ export default async function Page() {
                     </tr>
                   ))}
                 </>
-              )}
+              )} */}
             </tbody>
           </table>
         </div>
