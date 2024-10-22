@@ -25,7 +25,7 @@ async function FetchData() {
     resBookJson = await resBook.json();
     resUserJson = await resUser.json();
     resOrderJson = await resOrder.json();
-    return [resBookJson.data, resUserJson];
+    return [resBookJson.data, resUserJson, resOrderJson.data];
   } catch (error) {
     console.log(error);
     return [null, null, null];
@@ -86,7 +86,7 @@ export default async function Page() {
                   Terjual
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {/* {orders?.length} */}
+                  {orders?.length}
                 </p>
               </div>
               <FaShoppingCart className="text-gray-300 text-3xl mr-4" />{" "}
@@ -120,7 +120,7 @@ export default async function Page() {
               </tr>
             </thead>
             <tbody className="text-center">
-              {/* {orders && (
+              {orders && (
                 <>
                   {orders?.map((order, index) => (
                     <tr key={index}>
@@ -144,7 +144,7 @@ export default async function Page() {
                     </tr>
                   ))}
                 </>
-              )} */}
+              )}
             </tbody>
           </table>
         </div>
