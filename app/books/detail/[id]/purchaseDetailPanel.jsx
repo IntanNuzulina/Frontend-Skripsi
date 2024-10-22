@@ -1,12 +1,16 @@
+"use client";
+
 import useAuth from "@/hooks/useAuth";
 import { BASE_URL, IMAGE_URL } from "@/utils/config";
 
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const pricePerBook = products?.harga;
   const totalPrice = quantity * pricePerBook;
 
@@ -26,35 +30,43 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
 
   const handlePayment = async () => {
     setLoading(true);
-    const response = await axios.post(BASE_URL + "/payment/charge", {
-      amount: totalPrice,
-      email: user?.email,
-      phone: user?.phone,
-    });
-    const token = response.data.token;
+    try {
+      const response = await axios.post(BASE_URL + "/payment/charge", {
+        amount: totalPrice,
+        email: user?.email,
+        phone: user?.phone,
+        user_id: user?.id,
+        buku_id: products?.id,
+        qty: quantity,
+        alamat_penerima: user?.alamat,
+      });
+      const token = response.data.token;
 
-    setLoading(false);
-    window.snap.pay(token, {
-      onSuccess: function (result) {
-        /* You may add your own implementation here */
-        alert("payment success!");
-        console.log(result);
-      },
-      onPending: function (result) {
-        /* You may add your own implementation here */
-        alert("wating your payment!");
-        console.log(result);
-      },
-      onError: function (result) {
-        /* You may add your own implementation here */
-        alert("payment failed!");
-        console.log(result);
-      },
-      onClose: function () {
-        /* You may add your own implementation here */
-        alert("you closed the popup without finishing the payment");
-      },
-    });
+      setLoading(false);
+      window.snap.pay(token, {
+        onSuccess: function (result) {
+          /* You may add your own implementation here */
+          router.push("/order");
+          console.log(result);
+        },
+        onPending: function (result) {
+          /* You may add your own implementation here */
+          alert("wating your payment!");
+          console.log(result);
+        },
+        onError: function (result) {
+          /* You may add your own implementation here */
+          alert("payment failed!");
+          console.log(result);
+        },
+        onClose: function () {
+          /* You may add your own implementation here */
+          alert("you closed the popup without finishing the payment");
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
