@@ -24,7 +24,7 @@ async function FetchData() {
 
     resBookJson = await resBook.json();
     resUserJson = await resUser.json();
-    // resOrderJson = await resOrder.json();
+    resOrderJson = await resOrder.json();
     return [resBookJson.data, resUserJson];
   } catch (error) {
     console.log(error);
