@@ -20,7 +20,7 @@ export default async function Category() {
       <div className="flex gap-2 mt-3">
         {categories && (
           <>
-            {categories.data.map((category, index) => (
+            {categories?.data?.map((category, index) => (
               <CardCategory
                 key={index}
                 color={"bg-gradient-to-r from-blue-900 via-blue-900 to-red-400"}

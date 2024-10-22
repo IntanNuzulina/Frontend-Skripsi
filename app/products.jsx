@@ -9,12 +9,13 @@ export default async function Products() {
     next: { revalidate: 60 },
   });
   const resJson = await res.json();
-  const products = resJson;
+  let products = null;
+  products = resJson.data;
   return (
     <div className="mt-10 mx-8">
       <Title name={"Our Books"} sub={"Our Products"} />
       <div className="flex mt-3">
-        {products.data.map((product, index) => (
+        {products.map((product, index) => (
           <>
             {index < 6 && (
               <>

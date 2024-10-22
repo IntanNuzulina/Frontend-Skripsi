@@ -10,8 +10,8 @@ export default async function Flashsale({ flashsale }) {
     next: { revalidate: 60 },
   });
   const productsFlashsaleJson = await productsFlashsale.json();
-
-  const products = productsFlashsaleJson.data;
+  let products = null;
+  products = productsFlashsaleJson.data;
 
   return (
     <div className="mt-10 mx-8 border-b-2">
