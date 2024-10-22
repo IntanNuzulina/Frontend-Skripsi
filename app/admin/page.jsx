@@ -56,7 +56,7 @@ export default async function Page() {
                   Jumlah buku
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {books.length}
+                  {books?.length}
                 </p>
               </div>
               <FaBook className="text-gray-300 text-3xl mr-3" />{" "}
@@ -70,7 +70,7 @@ export default async function Page() {
                   Users
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {users.length}
+                  {users?.length}
                 </p>
               </div>
               <FaUser className="text-gray-300 text-3xl mr-3" />{" "}
@@ -85,7 +85,7 @@ export default async function Page() {
                   Terjual
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {orders.length}
+                  {orders?.length}
                 </p>
               </div>
               <FaShoppingCart className="text-gray-300 text-3xl mr-4" />{" "}
