@@ -8,23 +8,27 @@ import Sidebar from "./sidebar";
 import { BASE_URL } from "@/utils/config";
 
 async function FetchData() {
-  const resBook = await fetch(BASE_URL + "/buku/view", {
-    next: { revalidate: 60 },
-  });
-  const resUser = await fetch(BASE_URL + "/users", {
-    next: { revalidate: 60 },
-  });
-  const resOrder = await fetch(BASE_URL + "/order/view", {
-    next: { revalidate: 60 },
-  });
+  let resBookJson = null;
+  let resUserJson = null;
+  let resOrderJson = null;
+  try {
+    const resBook = await fetch(BASE_URL + "/buku/view", {
+      next: { revalidate: 60 },
+    });
+    const resUser = await fetch(BASE_URL + "/users", {
+      next: { revalidate: 60 },
+    });
+    const resOrder = await fetch(BASE_URL + "/order/view", {
+      next: { revalidate: 60 },
+    });
 
-  const resBookJson = await resBook.json();
-  const resUserJson = await resUser.json();
-  const resOrderJson = await resOrder.json();
-
-  console.log(resOrderJson.data);
-
-  return [resBookJson.data, resUserJson, resOrderJson];
+    resBookJson = await resBook.json();
+    resUserJson = await resUser.json();
+    resOrderJson = await resOrder.json();
+    return [resBookJson.data, resUserJson, resOrderJson];
+  } catch (error) {
+    return [null, null, null];
+  }
 }
 
 export default async function Page() {
@@ -115,27 +119,31 @@ export default async function Page() {
               </tr>
             </thead>
             <tbody className="text-center">
-              {orders?.data?.map((order, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{order.user.name}</td>
-                  <td>{order.buku.judul}</td>
-                  <td>{order.qty}</td>
-                  <td>{order.alamat_penerima}</td>
-                  <td>{order.harga}</td>
-                  <td>
-                    {order.status === "unpaid" ? (
-                      <span className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                        {order.status}
-                      </span>
-                    ) : (
-                      <span className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                        {order.status}
-                      </span>
-                    )}
-                  </td>
-                </tr>
-              ))}
+              {orders && (
+                <>
+                  {orders?.data?.map((order, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{order.user.name}</td>
+                      <td>{order.buku.judul}</td>
+                      <td>{order.qty}</td>
+                      <td>{order.alamat_penerima}</td>
+                      <td>{order.harga}</td>
+                      <td>
+                        {order.status === "unpaid" ? (
+                          <span className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
+                            {order.status}
+                          </span>
+                        ) : (
+                          <span className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
+                            {order.status}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              )}
             </tbody>
           </table>
         </div>
