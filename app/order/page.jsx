@@ -4,7 +4,6 @@ import Navbar from "@/components/navbar";
 import useAuth from "@/hooks/useAuth";
 import { BASE_URL, IMAGE_URL } from "@/utils/config";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function OrderHistory() {
@@ -12,7 +11,6 @@ export default function OrderHistory() {
   const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
-  const router = useRouter();
 
   const handlePayment = async (order) => {
     setLoading(true);
@@ -33,7 +31,7 @@ export default function OrderHistory() {
       window.snap.pay(token, {
         onSuccess: function (result) {
           /* You may add your own implementation here */
-          router.push("/order");
+          window.location.href = "/order";
           console.log(result);
         },
         onPending: function (result) {
