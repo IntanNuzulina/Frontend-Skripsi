@@ -86,7 +86,7 @@ export default async function Page() {
                   Terjual
                 </p>
                 <p className="text-2xl font-bold text-gray-700 ml-2">
-                  {orders?.length}
+                  {/* {orders?.length} */}
                 </p>
               </div>
               <FaShoppingCart className="text-gray-300 text-3xl mr-4" />{" "}
