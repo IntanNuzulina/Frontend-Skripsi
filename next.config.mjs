@@ -8,6 +8,14 @@ const nextConfig = {
       },
       {
         protocol: "http",
+        hostname: "api.intannuzulina.online",
+      },
+      {
+        protocol: "http",
+        hostname: "intannuzulina.online",
+      },
+      {
+        protocol: "http",
         hostname: "localhost",
       },
     ],
