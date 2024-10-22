@@ -11,17 +11,22 @@ async function FetchData() {
   const resBook = await fetch(BASE_URL + "/buku/view", {
     next: { revalidate: 60 },
   });
-  const resBookJson = await resBook.json();
   const resUser = await fetch(BASE_URL + "/users", {
     next: { revalidate: 60 },
   });
-  const resUserJson = await resUser.json();
+  const resOrder = await fetch(BASE_URL + "/order/view", {
+    next: { revalidate: 60 },
+  });
 
-  return [resBookJson.data, resUserJson];
+  const resBookJson = await resBook.json();
+  const resUserJson = await resUser.json();
+  const resOrderJson = await resOrder.json();
+
+  return [resBookJson.data, resUserJson, resOrderJson.data];
 }
 
 export default async function Page() {
-  const [books, users] = await FetchData();
+  const [books, users, orders] = await FetchData();
 
   return (
     <div className="flex">
@@ -73,7 +78,9 @@ export default async function Page() {
                 <p className="text-sm font-semibold text-gray-600 ml-2">
                   Terjual
                 </p>
-                <p className="text-2xl font-bold text-gray-700 ml-2">90</p>
+                <p className="text-2xl font-bold text-gray-700 ml-2">
+                  {orders.length}
+                </p>
               </div>
               <FaShoppingCart className="text-gray-300 text-3xl mr-4" />{" "}
             </div>
@@ -103,136 +110,30 @@ export default async function Page() {
                 <th>Alamat</th>
                 <th>Total</th>
                 <th>Status</th>
-                <th>Aksi</th>
               </tr>
             </thead>
             <tbody className="text-center">
-              {/* row 1 */}
-              <tr>
-                <td>1</td>
-                <td>Intan</td>
-                <td>IPS</td>
-                <td>1</td>
-                <td>Mila</td>
-                <td>Rp. 200.000</td>
-                <td>Berhasil Terkirim</td>
-                <td className="">
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                    Kirim
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                    Gagal
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                    Selesai
-                  </button>
-                </td>
-              </tr>
-              {/* row 2 */}
-              <tr>
-                <td>2</td>
-                <td>Intan</td>
-                <td>IPS</td>
-                <td>1</td>
-                <td>Mila</td>
-                <td>Rp. 200.000</td>
-                <td>Berhasil Terkirim</td>
-                <td className="">
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                    Kirim
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                    Gagal
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                    Selesai
-                  </button>
-                </td>
-              </tr>
-
-              {/* row 3 */}
-              <tr>
-                <td>3</td>
-                <td>Intan</td>
-                <td>IPS</td>
-                <td>1</td>
-                <td>Mila</td>
-                <td>Rp. 200.000</td>
-                <td>Berhasil Terkirim</td>
-                <td className="">
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                    Kirim
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                    Gagal
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                    Selesai
-                  </button>
-                </td>
-              </tr>
-
-              {/* row 4 */}
-              <tr>
-                <td>4</td>
-                <td>Intan</td>
-                <td>IPS</td>
-                <td>1</td>
-                <td>Mila</td>
-                <td>Rp. 200.000</td>
-                <td>Berhasil Terkirim</td>
-                <td className="">
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                    Kirim
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                    Gagal
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                    Selesai
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Intan</td>
-                <td>IPS</td>
-                <td>1</td>
-                <td>Mila</td>
-                <td>Rp. 200.000</td>
-                <td>Berhasil Terkirim</td>
-                <td className="">
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                    Kirim
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                    Gagal
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                    Selesai
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Intan</td>
-                <td>IPS</td>
-                <td>1</td>
-                <td>Mila</td>
-                <td>Rp. 200.000</td>
-                <td>Berhasil Terkirim</td>
-                <td className="">
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                    Kirim
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                    Gagal
-                  </button>
-                  <button className="mx-auto w-12 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                    Selesai
-                  </button>
-                </td>
-              </tr>
+              {orders.map((order, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{order.user.name}</td>
+                  <td>{order.buku.judul}</td>
+                  <td>{order.qty}</td>
+                  <td>{order.alamat_penerima}</td>
+                  <td>{order.harga}</td>
+                  <td>
+                    {order.status === "unpaid" ? (
+                      <span className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
+                        {order.status}
+                      </span>
+                    ) : (
+                      <span className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
+                        {order.status}
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

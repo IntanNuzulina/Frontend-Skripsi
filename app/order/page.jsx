@@ -1,6 +1,29 @@
+"use client";
+
 import Navbar from "@/components/navbar";
+import { BASE_URL, IMAGE_URL } from "@/utils/config";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function OrderHistory() {
+  const [order, setOrder] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(BASE_URL + "/order/user", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
+            Accept: "application/json",
+          },
+        });
+        setOrder(res.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <Navbar />
@@ -25,72 +48,37 @@ export default function OrderHistory() {
           </thead>
           <tbody className="text-center">
             {/* row 1 */}
-            <tr>
-              <td>1</td>
-              <td className="flex justify-center items-center">
-                <img src="/images/bahasa.jpg" alt="" className="w-15 h-20" />
-              </td>
-              <td>IPS</td>
-              <td>1</td>
-              <td>Mila</td>
-              <td>Rp. 200.000</td>
-              <td className="">
-                <button className="mx-auto w-16 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                  Proses
-                </button>
-                {/* <button className="mx-auto w-16 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                  Gagal
-                </button>
-                <button className="mx-auto w-16 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                  Selesai
-                </button> */}
-              </td>
-            </tr>
-            {/* row 2 */}
-            <tr>
-              <td>2</td>
-              <td className="flex justify-center items-center">
-                <img src="/images/bahasa.jpg" alt="" className="w-15 h-20" />
-              </td>
-              <td>IPS</td>
-              <td>1</td>
-              <td>Mila</td>
-              <td>Rp. 200.000</td>
-              <td className="">
-                {/* <button className="mx-auto w-16 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                  Proses
-                </button> */}
-                <button className="mx-auto w-16 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                  Gagal
-                </button>
-                {/* <button className="mx-auto w-16 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                  Selesai
-                </button> */}
-              </td>
-            </tr>
-
-            {/* row 3 */}
-            <tr>
-              <td>3</td>
-              <td className="flex justify-center items-center">
-                <img src="/images/bahasa.jpg" alt="" className="w-15 h-20" />
-              </td>
-              <td>IPS</td>
-              <td>1</td>
-              <td>Mila</td>
-              <td>Rp. 200.000</td>
-              <td className="">
-                {/* <button className="mx-auto w-16 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
-                  Proses
-                </button> */}
-                {/* <button className="mx-auto w-16 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
-                  Gagal
-                </button> */}
-                <button className="mx-auto w-16 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
-                  Selesai
-                </button>
-              </td>
-            </tr>
+            {order.length > 0 && (
+              <>
+                {order.map((item, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td className="flex justify-center items-center">
+                      <img
+                        src={`${IMAGE_URL}/${item.buku.image}`}
+                        alt="Gambar Buku"
+                        className="w-15 h-20"
+                      />
+                    </td>
+                    <td>{item.buku.judul}</td>
+                    <td>{item.qty}</td>
+                    <td>{item.alamat_penerima}</td>
+                    <td>Rp. {item.harga}</td>
+                    <td className="">
+                      {item.status === "unpaid" ? (
+                        <button className="mx-auto w-16 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
+                          Proses
+                        </button>
+                      ) : (
+                        <button className="mx-auto w-16 h-7 block rounded-lg text-xs text-white bg-blue-700  hover:bg-blue-900">
+                          Selesai
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </>
+            )}
           </tbody>
         </table>
       </div>
