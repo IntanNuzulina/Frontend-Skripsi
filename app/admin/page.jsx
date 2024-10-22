@@ -18,9 +18,9 @@ async function FetchData() {
     const resUser = await fetch(BASE_URL + "/users", {
       next: { revalidate: 60 },
     });
-    // const resOrder = await fetch(BASE_URL + "/order/view", {
-    //   next: { revalidate: 60 },
-    // });
+    const resOrder = await fetch(BASE_URL + "/order/view", {
+      next: { revalidate: 60 },
+    });
 
     resBookJson = await resBook.json();
     resUserJson = await resUser.json();
