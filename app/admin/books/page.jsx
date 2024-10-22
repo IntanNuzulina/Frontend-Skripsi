@@ -433,7 +433,7 @@ export default function Page() {
                   </option>
                   {dataFlashsale.map((data, index) => (
                     <option value={data.id} key={index}>
-                      {data.tanggal_akhir}
+                      {data.tanggal_akhir ? data.tanggal_akhir : "-"}
                     </option>
                   ))}
                 </select>
