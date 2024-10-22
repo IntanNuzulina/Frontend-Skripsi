@@ -33,7 +33,7 @@ async function FetchData() {
 }
 
 export default async function Page() {
-  const [books, users] = await FetchData();
+  const [books, users, orders] = await FetchData();
 
   return (
     <div className="flex">
