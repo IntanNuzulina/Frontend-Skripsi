@@ -25,8 +25,9 @@ async function FetchData() {
     resBookJson = await resBook.json();
     resUserJson = await resUser.json();
     resOrderJson = await resOrder.json();
-    return [resBookJson.data, resUserJson, resOrderJson];
+    return [resBookJson.data, resUserJson, resOrderJson.data];
   } catch (error) {
+    console.log(error);
     return [null, null, null];
   }
 }
@@ -121,7 +122,7 @@ export default async function Page() {
             <tbody className="text-center">
               {orders && (
                 <>
-                  {orders?.data?.map((order, index) => (
+                  {orders?.map((order, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
                       <td>{order.user.name}</td>
