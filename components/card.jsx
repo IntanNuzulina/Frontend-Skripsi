@@ -3,9 +3,11 @@ import { IMAGE_URL } from "@/utils/config";
 export default function Card(props) {
   return (
     <div className="card card-compact  rounded-tl-lg mx-4 bg-base-100 shadow-xl relatif w-[180px] my-3 transform transition-transform duration-300 hover:scale-95">
-      <div className="absolute left-0 top-0 bg-red-500 px-3 py-1 text-white rounded-br-lg rounded-tl-lg ">
-        20%
-      </div>
+      {props.diskon && (
+        <div className="absolute left-0 top-0 bg-red-500 px-3 py-1 text-white rounded-br-lg rounded-tl-lg ">
+          {props.diskon}%
+        </div>
+      )}
       <figure>
         <img
           src={`${IMAGE_URL}/${props.image}`}

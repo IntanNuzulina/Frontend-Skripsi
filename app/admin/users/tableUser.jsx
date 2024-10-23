@@ -81,7 +81,6 @@ export default function TableUser() {
           },
         }
       );
-      console.log(response);
       location.reload();
     } catch (error) {
       console.log(error);

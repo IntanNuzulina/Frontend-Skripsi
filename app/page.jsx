@@ -10,24 +10,18 @@ export default async function Page() {
   let responseFlashsale = null;
   let flashsale = null;
   let productFlashsales = null;
-  let countFlashsaleProducts = null;
   try {
-    responseFlashsale = await fetch(BASE_URL + "/buku/view", {
+    responseFlashsale = await fetch(BASE_URL + "/buku/view?flashsale", {
       next: { revalidate: 60 },
     });
 
-    const responseDataFlashsale = await fetch(BASE_URL + "/flash-sale/view", {
+    const responseDataFlashsale = await fetch(BASE_URL + "/flash-sale", {
       next: { revalidate: 60 },
     });
     const dataFlashsale = await responseFlashsale.json();
     productFlashsales = dataFlashsale.data;
     const flashsaleJson = await responseDataFlashsale.json();
-    flashsale = flashsaleJson.data;
-    countFlashsaleProducts = 0;
-    productFlashsales.forEach((product) => {
-      if (product.flashsale.tanggal_akhir !== "0000-00-00 00:00:00")
-        countFlashsaleProducts++;
-    });
+    flashsale = flashsaleJson;
   } catch (error) {
     console.log(error);
   }
@@ -36,8 +30,8 @@ export default async function Page() {
     <>
       <Navbar />
       <Header />
-      {countFlashsaleProducts > 0 && (
-        <Flashsale flashsale={flashsale[0].tanggal_akhir} />
+      {new Date(flashsale.data[0].tanggal_akhir) >= new Date() && (
+        <Flashsale flashsale={flashsale} products={productFlashsales} />
       )}
       <Category />
       <Products />

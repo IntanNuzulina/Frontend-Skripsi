@@ -9,6 +9,7 @@ import { HiShoppingCart } from "react-icons/hi";
 import { IoBagCheck } from "react-icons/io5";
 import PurchaseDetailsPanel from "./purchaseDetailPanel";
 import { BASE_URL, IMAGE_URL } from "@/utils/config";
+import { BiSolidTag } from "react-icons/bi";
 
 export default function DetailProduct({ products }) {
   const [bukuId, setBukuId] = useState(products.id);
@@ -66,7 +67,7 @@ export default function DetailProduct({ products }) {
       <div className="shadow-lg mt-6  ml-3 lg:ml-5 rounded-3xl lg:mb-12 mx-5">
         <div className="w-full lg:w-[700px] p-5 grid md:grid-cols-[250px_minmax(900px,_1fr)] grid-cols-1">
           <Image
-            src={IMAGE_URL + "/" + products.gambar}
+            src={IMAGE_URL + "/" + products.image}
             alt="Buku"
             width={200}
             height={100}
@@ -122,18 +123,32 @@ export default function DetailProduct({ products }) {
 
       <div className="mt-6 lg:mt-6 lg:pt-5  mx-5 mb-5">
         <div className="shadow p-5 rounded-2xl bg-slate-100 ">
-          <h2 className="font-bold text-md mb-1 text-center">Harga Buku</h2>
+          <h2 className="font-bold text-md mb-1">Harga Buku</h2>
           <div className="border-b-2 border-x-slate-600 mb-3"></div>
-          <div className="flex justify-between">
-            <div className="text-center">
-              <h4 className="font-semibold mx-auto">
-                {" "}
-                Harga <span className="font-bold">Rp. {products.harga}</span>
-              </h4>
-            </div>
-            <div>
-              <h4></h4>
-            </div>
+          <div className="font-semibold">
+            {products?.flashsale?.diskon ? (
+              <div className="relative">
+                <p className="text-red-500 line-through font-light inline me-2">
+                  Rp.{products.harga}{" "}
+                </p>
+                <div className="absolute top-2 right-20">
+                  <div className="relative">
+                    <BiSolidTag className="absolute top-0 right-0 text-red-500 text-[55px]" />
+                    <span className="absolute top-4 right-2.5 text-sm text-white">
+                      -{products?.flashsale?.diskon}%
+                    </span>
+                  </div>
+                </div>
+                <p className="text-3xl font-bold text-blue-900">
+                  Rp.
+                  {(products.harga * products?.flashsale?.diskon) / 100}
+                </p>
+              </div>
+            ) : (
+              <span className="text-3xl font-bold text-blue-900">
+                Rp.{products.harga}
+              </span>
+            )}
           </div>
 
           <div className="mt-6 w-full lg:w-[300px] mb-3">

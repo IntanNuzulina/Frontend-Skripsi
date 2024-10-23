@@ -27,7 +27,6 @@ export default function Page() {
           },
         }
       );
-      console.log(response.data);
       alert("berhasil menghapus flashsale");
       location.reload();
     } catch (error) {
@@ -38,11 +37,11 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(BASE_URL + "/flash-sale/view");
+        const response = await axios.get(BASE_URL + "/flash-sale");
         setFlashSale(response.data.data);
         setFilteredFlashSale(response.data.data);
       } catch (error) {
-        //
+        console.log(error);
       }
     };
     fetchData();
@@ -80,7 +79,6 @@ export default function Page() {
         }
       );
       setLoading(false);
-      console.log(response.data);
       alert("berhasil menambahkan flashsale");
       location.reload();
     } catch (error) {

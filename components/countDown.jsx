@@ -10,8 +10,7 @@ export default function CountDown({ flashsale }) {
   useEffect(() => {
     const calculateTimeDifference = () => {
       const now = new Date();
-      const times = new Date(flashsale);
-      times.setHours(0, 0, 0, 0);
+      const times = new Date(flashsale.data[0].tanggal_akhir);
       const diffMilliseconds = times - now;
       const diffSeconds = Math.floor(diffMilliseconds / 1000);
       const s = diffSeconds % 60;
@@ -22,12 +21,19 @@ export default function CountDown({ flashsale }) {
       setMinute(m);
       setHour(h);
       setDay(d);
+
+      if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
+        clearInterval(timer);
+        flashsale = null;
+        alert("Flashsale Berakhir");
+        location.reload();
+      }
     };
 
     const timer = setInterval(calculateTimeDifference, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [flashsale]);
 
   return (
     <div className="grid grid-flow-col gap-5 text-center auto-cols-max ml-10">

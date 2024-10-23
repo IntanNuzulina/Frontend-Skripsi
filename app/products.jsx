@@ -27,6 +27,10 @@ export default async function Products() {
                     publisher={product.penerbit}
                     price={product.harga}
                     stock={product.stok}
+                    diskon={
+                      new Date(product?.flashsale?.tanggal_akhir) >=
+                        new Date() && product?.flashsale?.diskon
+                    }
                     button={"Lihat Detail"}
                   />
                 </Link>

@@ -11,7 +11,7 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const pricePerBook = products?.harga;
+  const pricePerBook = products.harga;
   const totalPrice = quantity * pricePerBook;
 
   const { user } = useAuth();
@@ -93,12 +93,14 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
           <h3 className="text-xl font-semibold mb-2">{products?.judul}</h3>
           <div className="flex items-center">
             <img
-              src={IMAGE_URL + "/" + products?.gambar}
+              src={IMAGE_URL + "/" + products?.image}
               alt="GAMBAR BUKU"
               className="w-24 h-24 rounded-md mr-4"
             />
             <div className="flex flex-col">
-              <p className="text-gray-600">Harga: Rp {pricePerBook}</p>
+              <p className="text-gray-600">
+                Harga: Rp {(pricePerBook * products?.flashsale?.diskon) / 100}
+              </p>
 
               {/* Quantity Control */}
               <div className="flex items-center mt-2">
@@ -141,7 +143,9 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
         <div className="p-4 border-t">
           <div className="flex justify-between mb-4">
             <span className="text-xl font-semibold">Total:</span>
-            <span className="text-xl font-bold">Rp {totalPrice}</span>
+            <span className="text-xl font-bold">
+              Rp {(totalPrice * products?.flashsale?.diskon) / 100}
+            </span>
           </div>
 
           <button

@@ -5,14 +5,7 @@ import CountDown from "@/components/countDown";
 import Link from "next/link";
 import { BASE_URL } from "@/utils/config";
 
-export default async function Flashsale({ flashsale }) {
-  const productsFlashsale = await fetch(BASE_URL + "/buku/view", {
-    next: { revalidate: 60 },
-  });
-  const productsFlashsaleJson = await productsFlashsale.json();
-  let products = null;
-  products = productsFlashsaleJson.data;
-
+export default async function Flashsale({ flashsale, products }) {
   return (
     <div className="mt-10 mx-8 border-b-2">
       <div className="flex gap-2 mt-3">
@@ -32,6 +25,7 @@ export default async function Flashsale({ flashsale }) {
                     publisher={product.penerbit}
                     price={product.harga}
                     stock={product.stok}
+                    diskon={product?.flashsale?.diskon}
                     button={"Beli Sekarang"}
                   />
                 )}

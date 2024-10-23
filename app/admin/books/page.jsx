@@ -76,7 +76,6 @@ export default function Page() {
       setRender((prev) => !prev);
 
       alert("Berhasil menambahkan data!");
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -117,14 +116,6 @@ export default function Page() {
     }
   };
 
-  useEffect(
-    () => {
-      searchData(search);
-    },
-    [search],
-    products
-  );
-
   const handleSubmitEdit = async (e, book) => {
     e.preventDefault();
     try {
@@ -153,7 +144,6 @@ export default function Page() {
           },
         }
       );
-      console.log(response.data);
       setRender((prev) => !prev);
       alert("berhasil update");
     } catch (error) {
@@ -175,7 +165,7 @@ export default function Page() {
     setBahasa(book.bahasa);
     setIsbn(book.isbn);
     setValueIdCategory(book.kategori.id);
-    setValueIdFlashsale(book.flashsale.id);
+    setValueIdFlashsale(book?.flashsale?.id || 1);
     setIsEdit(true);
   };
 
@@ -183,7 +173,6 @@ export default function Page() {
     try {
       const response = await axios.delete(BASE_URL + "/buku/delete/" + id);
       alert("berhasil menghapus Buku!");
-      console.log(response.data);
       setProducts((prev) => prev.filter((data) => data.id !== id));
     } catch (error) {
       console.log(error);
@@ -192,6 +181,18 @@ export default function Page() {
 
   const handleModal = () => {
     setIsOpen(!isOpen);
+    setJudul("");
+    setPenerbit("");
+    setPenulis("");
+    setHarga("");
+    setDeskripsi("");
+    setStok("");
+    setJumlahHalaman("");
+    setTahunTerbit("");
+    setBahasa("");
+    setIsbn("");
+    setValueIdCategory("");
+    setValueIdFlashsale("");
   };
 
   const handleModaleditOpen = () => {
@@ -512,7 +513,7 @@ export default function Page() {
                   <td>{product.isbn}</td>
                   <td>{product.harga}</td>
                   <td>{product.kategori.kategori}</td>
-                  <td>{product.flashsale.tanggal_akhir}</td>
+                  <td>{product?.flashsale?.tanggal_akhir}</td>
                   <td className="">
                     <button
                       className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-yellow-400  hover:bg-yellow-500"
