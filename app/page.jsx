@@ -30,7 +30,7 @@ export default async function Page() {
     <>
       <Navbar />
       <Header />
-      {new Date(flashsale.data[0].tanggal_akhir) >= new Date() && (
+      {new Date(flashsale?.data[0]?.tanggal_akhir) >= new Date() && (
         <Flashsale flashsale={flashsale} products={productFlashsales} />
       )}
       <Category />
