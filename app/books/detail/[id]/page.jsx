@@ -6,6 +6,7 @@ async function fetchProduct(id) {
   try {
     const response = await fetch(`${BASE_URL}/buku/view/${id}`, {
       next: { revalidate: 60 },
+      cache: "no-store",
     });
     const resJson = await response.json();
     return resJson.data;
