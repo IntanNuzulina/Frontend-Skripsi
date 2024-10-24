@@ -12,9 +12,12 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [filteredFlashSale, setFilteredFlashSale] = useState([]);
+  const [render, setRender] = useState(false);
 
   const handleModal = () => {
     setIsOpen(!isOpen);
+    setDiskon("");
+    setDate("");
   };
 
   const handleDelete = async (id) => {
@@ -28,7 +31,7 @@ export default function Page() {
         }
       );
       alert("berhasil menghapus flashsale");
-      location.reload();
+      setRender((prev) => !prev);
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +48,8 @@ export default function Page() {
       }
     };
     fetchData();
-  }, []);
+    searchData(search);
+  }, [search, render]);
 
   const searchData = (searchValue) => {
     if (searchValue) {
@@ -58,9 +62,6 @@ export default function Page() {
       setFilteredFlashSale(flashSale);
     }
   };
-  useEffect(() => {
-    searchData(search);
-  }, [search]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,7 +81,7 @@ export default function Page() {
       );
       setLoading(false);
       alert("berhasil menambahkan flashsale");
-      location.reload();
+      setRender((prev) => !prev);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -89,7 +90,6 @@ export default function Page() {
 
   return (
     <div className="flex">
-      <Sidebar />
       <div className="flex-1">
         <div className="w-full h-[70px] bg-white shadow-md shadow-slate-300 ">
           <div className="flex gap-4 justify-end py-4">

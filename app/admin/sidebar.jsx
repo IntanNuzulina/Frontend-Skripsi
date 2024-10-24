@@ -12,8 +12,7 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
 
-export default function Sidebar() {
-  const [open, setOpen] = useState(true);
+export default function Sidebar({ open, setOpen }) {
   const router = useRouter();
   const pathname = usePathname();
   const { logout } = useAuth();
@@ -45,7 +44,7 @@ export default function Sidebar() {
       <div
         className={`${
           open ? "w-72" : "w-20"
-        } bg-blue-900 h-screen relative p-5 pt-8  duration-300`}
+        } bg-blue-900 h-full fixed z-10 p-5 pt-8  duration-300`}
       >
         <Link href="/">
           <div className="flex gap-x-4 items-center">

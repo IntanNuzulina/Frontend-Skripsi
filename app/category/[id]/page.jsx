@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default async function KategoriPage({ params }) {
   const res = await fetch(BASE_URL + "/kategori/view/" + params.id, {
-    next: { revalidate: 60 },
+    next: { revalidate: 0 },
   });
   const resJson = await res.json();
   const products = resJson;

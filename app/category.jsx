@@ -7,8 +7,7 @@ export default async function Category() {
   let categories = null;
   try {
     const res = await fetch(BASE_URL + "/kategori/view", {
-      next: { revalidate: 60 },
-      cache: "no-store",
+      next: { revalidate: 0 },
     });
     const resJson = await res.json();
     categories = resJson;

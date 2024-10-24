@@ -10,7 +10,7 @@ export default function CountDown({ flashsale }) {
   useEffect(() => {
     const calculateTimeDifference = () => {
       const now = new Date();
-      const times = new Date(flashsale.data[0].tanggal_akhir);
+      const times = new Date(flashsale[0]?.tanggal_akhir);
       const diffMilliseconds = times - now;
       const diffSeconds = Math.floor(diffMilliseconds / 1000);
       const s = diffSeconds % 60;
@@ -24,7 +24,6 @@ export default function CountDown({ flashsale }) {
 
       if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
         clearInterval(timer);
-        flashsale = null;
         alert("Flashsale Berakhir");
         location.reload();
       }

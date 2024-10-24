@@ -13,13 +13,13 @@ async function FetchData() {
   let resOrderJson = null;
   try {
     const resBook = await fetch(BASE_URL + "/buku/view", {
-      next: { revalidate: 60 },
+      next: { revalidate: 0 },
     });
     const resUser = await fetch(BASE_URL + "/users", {
-      next: { revalidate: 60 },
+      next: { revalidate: 0 },
     });
     const resOrder = await fetch(BASE_URL + "/order/view", {
-      next: { revalidate: 60 },
+      next: { revalidate: 0 },
     });
 
     resBookJson = await resBook.json();
@@ -37,8 +37,7 @@ export default async function Page() {
 
   return (
     <div className="flex">
-      <Sidebar />
-      <div className=" flex-1">
+      <div className="flex-1">
         <div className="w-full h-[70px] sticky top-0 z-50 bg-white shadow-md shadow-slate-300 ">
           <div className="flex gap-4 justify-end py-4">
             <p className="text-xl font-semibold text-gray-600 ">Admin</p>

@@ -5,7 +5,6 @@ import TableUser from "./tableUser";
 export default async function Page() {
   return (
     <div className="flex">
-      <Sidebar />
       <div className="flex-1">
         <div className="w-full h-[70px] bg-white shadow-md shadow-slate-300 ">
           <div className="flex gap-4 justify-end py-4">

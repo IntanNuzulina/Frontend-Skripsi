@@ -5,7 +5,7 @@ import { BASE_URL } from "@/utils/config";
 
 export default async function Page() {
   const res = await fetch(BASE_URL + "/buku/view?latest", {
-    next: { revalidate: 60 },
+    next: { revalidate: 0 },
   });
   const resJson = await res.json();
   const products = resJson;

@@ -5,8 +5,7 @@ import { BASE_URL } from "@/utils/config";
 async function fetchProduct(id) {
   try {
     const response = await fetch(`${BASE_URL}/buku/view/${id}`, {
-      next: { revalidate: 60 },
-      cache: "no-store",
+      next: { revalidate: 0 },
     });
     const resJson = await response.json();
     return resJson.data;
