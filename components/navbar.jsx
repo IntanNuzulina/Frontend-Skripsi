@@ -72,12 +72,6 @@ export default function Navbar() {
 
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Restora:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <div className="navbar bg-white sticky top-0 z-50 shadow-sm shadow-white-200">
         <div className="navbar-start">
           <div className="dropdown">
@@ -99,24 +93,39 @@ export default function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52 bg-white"
             >
               <li>
                 <Link
                   href={"/"}
-                  className="hover:border-b-red-500 hover:border-b active:bg-red-500 hover:bg-transparent"
+                  className="hover:bg-slate-300 hover:border-b active:bg-red-500 hover:bg-transparent"
                 >
                   Beranda
                 </Link>
               </li>
               <li>
-                <Link href={"/books"}>Buku</Link>
+                <Link
+                  href={"/books"}
+                  className="hover:bg-slate-300 hover:border-b active:bg-red-500 hover:bg-transparent"
+                >
+                  Buku
+                </Link>
               </li>
               <li>
-                <Link href={"/about"}>Tentang</Link>
+                <Link
+                  href={"/about"}
+                  className="hover:bg-slate-300 hover:border-b active:bg-red-500 hover:bg-transparent"
+                >
+                  Tentang
+                </Link>
               </li>
               <li>
-                <Link href={"/contact"}>Kontak</Link>
+                <Link
+                  href={"/contact"}
+                  className=" hover:border-b active:bg-red-500 hover:bg-slate-300"
+                >
+                  Kontak
+                </Link>
               </li>
             </ul>
           </div>
@@ -192,7 +201,7 @@ export default function Navbar() {
           >
             <input
               type="text"
-              placeholder="Cari..."
+              placeholder="Cari Buku..."
               className="input input-bordered w-24 md:w-auto"
               ref={inputRef}
               hidden={!activeSearch}
@@ -243,7 +252,10 @@ export default function Navbar() {
                     className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow bg-white"
                   >
                     <li>
-                      <Link href="/account" className="justify-between">
+                      <Link
+                        href="/account"
+                        className="justify-between hover:bg-slate-300"
+                      >
                         Profile
                         <span className="badge">New</span>
                       </Link>
@@ -251,7 +263,9 @@ export default function Navbar() {
 
                     {user?.role === "admin" && (
                       <li>
-                        <Link href="/admin">Dashboard</Link>
+                        <Link href="/admin" className="hover:bg-slate-300">
+                          Dashboard
+                        </Link>
                       </li>
                     )}
                     <li onClick={handleLogout}>

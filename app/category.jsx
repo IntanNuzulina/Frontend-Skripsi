@@ -18,17 +18,21 @@ export default async function Category() {
     <div className="mt-10 mx-8 border-b-2 pb-8">
       <Title name={"Category"} sub={"By Category"} />
       <div className="flex gap-2 mt-3">
-        {categories && (
-          <>
-            {categories?.data?.map((category, index) => (
-              <CardCategory
-                key={index}
-                color={"bg-gradient-to-r from-blue-900 via-blue-900 to-red-400"}
-                category={category}
-              />
-            ))}
-          </>
-        )}
+        <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-3  gap-4 lg:gap-2">
+          {categories && (
+            <>
+              {categories?.data?.map((category, index) => (
+                <CardCategory
+                  key={index}
+                  color={
+                    "bg-gradient-to-r from-blue-900 via-blue-900 to-red-400"
+                  }
+                  category={category}
+                />
+              ))}
+            </>
+          )}
+        </div>
       </div>
       <div className="mt-5 text-right">
         <Link href="/category">

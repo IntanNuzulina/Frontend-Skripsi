@@ -58,10 +58,20 @@ export default function DetailProduct({ products }) {
 
     document.body.appendChild(scriptTag);
 
+    console.log(new Date(products?.flashsale?.tanggal_akhir) >= new Date());
+
     return () => {
       document.body.removeChild(scriptTag);
     };
   }, []);
+
+  const formatRupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0, // Jika ingin tanpa desimal
+    }).format(number);
+  };
   return (
     <div className="flex flex-col justify-center lg:flex-row gap-6 lg:gap-9">
       <div className="shadow-lg mt-6  ml-3 lg:ml-5 rounded-3xl lg:mb-12 mx-5">
@@ -126,12 +136,13 @@ export default function DetailProduct({ products }) {
           <h2 className="font-bold text-md mb-1">Harga Buku</h2>
           <div className="border-b-2 border-x-slate-600 mb-3"></div>
           <div className="font-semibold">
-            {products?.flashsale?.diskon ? (
+            {new Date(products?.flashsale?.tanggal_akhir) >= new Date() &&
+            products?.flashsale?.diskon ? (
               <div className="relative">
                 <p className="text-red-500 line-through font-light inline me-2">
-                  Rp.{products.harga}{" "}
+                  {products.harga}{" "}
                 </p>
-                <div className="absolute top-2 right-20">
+                <div className="absolute top-4 right-0">
                   <div className="relative">
                     <BiSolidTag className="absolute top-0 right-0 text-red-500 text-[55px]" />
                     <span className="absolute top-4 right-2.5 text-sm text-white">
@@ -141,12 +152,13 @@ export default function DetailProduct({ products }) {
                 </div>
                 <p className="text-3xl font-bold text-blue-900">
                   Rp.
-                  {(products.harga * products?.flashsale?.diskon) / 100}
+                  {products.harga -
+                    (products.harga * products?.flashsale?.diskon) / 100}
                 </p>
               </div>
             ) : (
               <span className="text-3xl font-bold text-blue-900">
-                Rp.{products.harga}
+                {formatRupiah(products.harga)}
               </span>
             )}
           </div>

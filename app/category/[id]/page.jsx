@@ -17,7 +17,7 @@ export default async function KategoriPage({ params }) {
         <h2 className="text-xl font-bold  text-blue-900 ms-2 mb-2">
           Halaman Detail Kategori : {products?.data[0]?.kategori.kategori}
         </h2>
-        <div className="grid grid-cols-6 ">
+        <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-2">
           {products.data.map((product, index) => (
             <>
               <Link href={`/books/detail/${product.id}`}>

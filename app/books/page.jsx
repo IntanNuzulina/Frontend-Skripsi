@@ -28,7 +28,7 @@ export default async function Page() {
         </svg>
       </label>
       <div className="mx-auto w-[90%]">
-        <div className="grid grid-cols-6">
+        <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-2">
           {products.data.map((product, index) => (
             <>
               <Link href={`/books/detail/${product.id}`}>

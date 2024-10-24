@@ -99,7 +99,9 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
             />
             <div className="flex flex-col">
               <p className="text-gray-600">
-                Harga: Rp {(pricePerBook * products?.flashsale?.diskon) / 100}
+                Harga: Rp{" "}
+                {pricePerBook -
+                  (pricePerBook * products?.flashsale?.diskon) / 100}
               </p>
 
               {/* Quantity Control */}
@@ -144,7 +146,7 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
           <div className="flex justify-between mb-4">
             <span className="text-xl font-semibold">Total:</span>
             <span className="text-xl font-bold">
-              Rp {(totalPrice * products?.flashsale?.diskon) / 100}
+              Rp {totalPrice - (totalPrice * products?.flashsale?.diskon) / 100}
             </span>
           </div>
 
