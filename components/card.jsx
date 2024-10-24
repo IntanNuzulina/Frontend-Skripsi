@@ -1,6 +1,7 @@
 import { IMAGE_URL } from "@/utils/config";
 
 export default function Card(props) {
+  console.log(props.diskon);
   const formatRupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",

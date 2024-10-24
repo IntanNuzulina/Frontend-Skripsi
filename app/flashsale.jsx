@@ -53,6 +53,7 @@ export default function Flashsale() {
                             publisher={product.penerbit}
                             price={product.harga}
                             stock={product.stok}
+                            tanggal_akhir={product?.flashsale?.tanggal_akhir}
                             diskon={product?.flashsale?.diskon}
                             button={"Beli Sekarang"}
                           />
