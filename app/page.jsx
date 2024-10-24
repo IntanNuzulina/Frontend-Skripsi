@@ -13,10 +13,12 @@ export default async function Page() {
   try {
     responseFlashsale = await fetch(BASE_URL + "/buku/view?flashsale", {
       next: { revalidate: 60 },
+      cache: "no-store",
     });
 
     const responseDataFlashsale = await fetch(BASE_URL + "/flash-sale", {
       next: { revalidate: 60 },
+      cache: "no-store",
     });
     const dataFlashsale = await responseFlashsale.json();
     productFlashsales = dataFlashsale.data;

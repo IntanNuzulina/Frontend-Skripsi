@@ -8,6 +8,7 @@ export default async function Category() {
   try {
     const res = await fetch(BASE_URL + "/kategori/view", {
       next: { revalidate: 60 },
+      cache: "no-store",
     });
     const resJson = await res.json();
     categories = resJson;
