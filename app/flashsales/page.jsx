@@ -15,7 +15,7 @@ export default async function Page() {
         <div className="flex  mt-3">
           {products.map((product, index) => (
             <div key={index}>
-              {product.flashsale.tanggal_akhir !== "0000-00-00 00:00:00" && (
+              {product?.flashsale?.tanggal_akhir !== "0000-00-00 00:00:00" && (
                 <>
                   <Card
                     image={product.image}

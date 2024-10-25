@@ -3,12 +3,17 @@ import Navbar from "@/components/navbar";
 import useAuth from "@/hooks/useAuth";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { VscAccount } from "react-icons/vsc";
-
+import { useRouter } from "next/navigation";
 export default function Page() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const response = await logout();
+    response.status && router.push("/");
+  };
 
   useEffect(() => {
     if (user) {
@@ -51,7 +56,10 @@ export default function Page() {
 
           <div className="text-right mr-10 mt-14">
             <Link href="">
-              <button className="w-28 h-8  rounded-xl text-sm text-white font-bold bg-blue-900 hover:bg-red-500">
+              <button
+                className="w-28 h-8  rounded-xl text-sm text-white font-bold bg-blue-900 hover:bg-red-500"
+                onClick={handleLogout}
+              >
                 Keluar
               </button>
             </Link>

@@ -6,6 +6,8 @@ import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 import EditModalBook from "./edit-modal";
 import { BASE_URL, IMAGE_URL } from "@/utils/config";
+import { SwalTopEnd } from "@/components/MySwal";
+
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -63,6 +65,7 @@ export default function Page() {
       setLoading(false);
 
       setPenerbit("");
+      setCover("");
       setJudul("");
       setPenulis("");
       setHarga("");
@@ -75,9 +78,18 @@ export default function Page() {
 
       setRender((prev) => !prev);
 
-      alert("Berhasil menambahkan data!");
+      SwalTopEnd({
+        title: "Sukses!",
+        icon: "success",
+        text: "Berhasil menambahkan Buku!",
+      });
     } catch (error) {
       console.log(error);
+      SwalTopEnd({
+        title: "Gagal!",
+        icon: "error",
+        text: "Gagal menambahkan Buku!",
+      });
       setLoading(false);
     }
   };
@@ -102,6 +114,7 @@ export default function Page() {
     };
 
     fetchProducts();
+    searchData(search);
   }, [render]);
 
   //search function
@@ -145,9 +158,17 @@ export default function Page() {
         }
       );
       setRender((prev) => !prev);
-      alert("berhasil update");
+      SwalTopEnd({
+        title: "Sukses!",
+        icon: "success",
+        text: "Berhasil mengupdate Buku!",
+      });
     } catch (error) {
-      alert("Gagal update buku");
+      SwalTopEnd({
+        title: "Gagal!",
+        icon: "error",
+        text: "Gagal mengupdate Buku!",
+      });
       console.log(error);
     }
   };
@@ -172,8 +193,31 @@ export default function Page() {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(BASE_URL + "/buku/delete/" + id);
-      alert("berhasil menghapus Buku!");
-      setProducts((prev) => prev.filter((data) => data.id !== id));
+
+      // SwalConfirm({
+      //   title: "Yakin?",
+      //   text: "Anda yakin ingin menghapus Buku ini?",
+      //   icon: "warning",
+      //   showCancelButton: true,
+      //   confirmButtonColor: "#3085d6",
+      //   cancelButtonColor: "#d33",
+      //   confirmButtonText: "Ya, Hapus!",
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     Swal.fire({
+      //       title: "Deleted!",
+      //       text: "Your file has been deleted.",
+      //       icon: "success",
+      //     });
+      //   }
+      // });
+
+      SwalTopEnd({
+        title: "Sukses!",
+        icon: "success",
+        text: "Berhasil menghapus Buku!",
+      });
+      setRender((prev) => !prev);
     } catch (error) {
       console.log(error);
     }

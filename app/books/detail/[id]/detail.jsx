@@ -133,14 +133,14 @@ export default function DetailProduct({ products }) {
 
       <div className="mt-6 lg:mt-6 lg:pt-5  mx-5 mb-5">
         <div className="shadow p-5 rounded-2xl bg-slate-100 ">
-          <h2 className="font-bold text-md mb-1">Harga Buku</h2>
+          <h2 className="font-bold text-md mb-1 text-center">Harga Buku</h2>
           <div className="border-b-2 border-x-slate-600 mb-3"></div>
           <div className="font-semibold">
             {new Date(products?.flashsale?.tanggal_akhir) >= new Date() &&
             products?.flashsale?.diskon ? (
               <div className="relative">
                 <p className="text-red-500 line-through font-light inline me-2">
-                  {products.harga}{" "}
+                  {formatRupiah(products.harga)}
                 </p>
                 <div className="absolute top-4 right-0">
                   <div className="relative">
@@ -151,9 +151,10 @@ export default function DetailProduct({ products }) {
                   </div>
                 </div>
                 <p className="text-3xl font-bold text-blue-900">
-                  Rp.
-                  {products.harga -
-                    (products.harga * products?.flashsale?.diskon) / 100}
+                  {formatRupiah(
+                    products.harga -
+                      (products.harga * products?.flashsale?.diskon) / 100
+                  )}
                 </p>
               </div>
             ) : (

@@ -10,9 +10,9 @@ export default function Card(props) {
     }).format(number);
   };
   return (
-    <div className="card card-compact  rounded-tl-lg mx-4 bg-base-100 shadow-xl relatif w-[180px] my-3 transform transition-transform duration-300 hover:scale-95">
+    <div className="card card-compact  rounded-tl-lg lg:mx-4 bg-base-100 shadow-xl relatif lg:w-[180px] w-[150px] my-2 transform transition-transform duration-300 hover:scale-95 mx-3">
       {props.diskon && (
-        <div className="absolute left-0 top-0 bg-red-500 px-3 py-1 text-white rounded-br-lg rounded-tl-lg ">
+        <div className="absolute left-0 top-0 bg-red-500 px-3 py-2 text-white rounded-br-lg rounded-tl-lg ">
           {props.diskon}%
         </div>
       )}

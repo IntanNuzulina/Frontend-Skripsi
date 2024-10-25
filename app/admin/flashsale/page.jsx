@@ -4,6 +4,7 @@ import Sidebar from "../sidebar";
 import { FaRegUserCircle, FaTrashAlt, FaEdit, FaPlus } from "react-icons/fa";
 import axios from "axios";
 import { BASE_URL } from "@/utils/config";
+import { SwalTopEnd } from "@/components/MySwal";
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [flashSale, setFlashSale] = useState({});
@@ -30,7 +31,11 @@ export default function Page() {
           },
         }
       );
-      alert("berhasil menghapus flashsale");
+      SwalTopEnd({
+        title: "Sukses!",
+        icon: "success",
+        text: "Berhasil menghapus flashsale!",
+      });
       setRender((prev) => !prev);
     } catch (error) {
       console.log(error);
@@ -80,7 +85,11 @@ export default function Page() {
         }
       );
       setLoading(false);
-      alert("berhasil menambahkan flashsale");
+      SwalTopEnd({
+        icon: "success",
+        title: "Sukses!",
+        text: "Berhasil menambahkan flashsale!",
+      });
       setRender((prev) => !prev);
     } catch (error) {
       console.log(error);

@@ -16,6 +16,14 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
 
   const { user } = useAuth();
 
+  const formatRupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0, // Jika ingin tanpa desimal
+    }).format(number);
+  };
+
   // Function to handle quantity increase
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
@@ -95,15 +103,17 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
             <img
               src={IMAGE_URL + "/" + products?.image}
               alt="GAMBAR BUKU"
-              className="w-24 h-24 rounded-md mr-4"
+              className="w-20 h-25 rounded-md mr-4"
             />
             <div className="flex flex-col">
               <p className="text-gray-600">
-                Harga: Rp{" "}
-                {new Date(products?.flashsale?.tanggal_akhir) > new Date()
-                  ? pricePerBook -
-                    (pricePerBook * products?.flashsale?.diskon) / 100
-                  : pricePerBook}
+                Harga:{" "}
+                {formatRupiah(
+                  new Date(products?.flashsale?.tanggal_akhir) > new Date()
+                    ? pricePerBook -
+                        (pricePerBook * products?.flashsale?.diskon) / 100
+                    : pricePerBook
+                )}
               </p>
 
               {/* Quantity Control */}
@@ -148,21 +158,23 @@ export default function PurchaseDetailsPanel({ showPanel, onClose, products }) {
           <div className="flex justify-between mb-4">
             <span className="text-xl font-semibold">Total:</span>
             <span className="text-xl font-bold">
-              Rp{" "}
-              {new Date(products?.flashsale?.tanggal_akhir) > new Date()
-                ? totalPrice - (totalPrice * products?.flashsale?.diskon) / 100
-                : totalPrice}
+              {formatRupiah(
+                new Date(products?.flashsale?.tanggal_akhir) > new Date()
+                  ? totalPrice -
+                      (totalPrice * products?.flashsale?.diskon) / 100
+                  : totalPrice
+              )}
             </span>
           </div>
 
           <button
-            className="w-full bg-blue-500 text-white p-3 rounded-lg text-center"
+            className="w-full bg-blue-700 text-white p-3 rounded-lg text-center"
             onClick={handlePayment}
           >
             {loading ? (
-              <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+              <svg className="animate-spin h-5 w-5 mx-auto" viewBox="0 0 24 24">
                 <circle
-                  className="opacity-25"
+                  className="opacity-25 mx-auto block"
                   cx="12"
                   cy="12"
                   r="10"

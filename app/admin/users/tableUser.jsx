@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import EditModalUser from "./edit-modal";
 import { BASE_URL } from "@/utils/config";
+import { SwalTopEnd } from "@/components/MySwal";
 
 export default function TableUser() {
   const [users, setUsers] = useState([]);
@@ -14,6 +15,7 @@ export default function TableUser() {
   const [email, setEmail] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [search, setSearch] = useState("");
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -54,7 +56,8 @@ export default function TableUser() {
           Authorization: `Bearer ${localStorage.getItem("alhikmah-token")}`,
         },
       });
-      setUsers((prev) => prev.filter((data) => data.id !== id));
+
+      setRender((prev) => !prev);
       alert(response.data.message);
     } catch (error) {
       console.log(error);
@@ -81,7 +84,12 @@ export default function TableUser() {
           },
         }
       );
-      location.reload();
+      SwalTopEnd({
+        icon: "success",
+        title: "Sukses!",
+        text: "Berhasil mengedit user!",
+      });
+      setRender((prev) => !prev);
     } catch (error) {
       console.log(error);
     }

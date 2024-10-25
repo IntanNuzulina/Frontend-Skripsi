@@ -6,6 +6,7 @@ import axios from "axios";
 import AddModalCategory from "./add-modal";
 import EditModalCategory from "./edit-modal";
 import { BASE_URL } from "@/utils/config";
+import { SwalTopEnd } from "@/components/MySwal";
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [search, setSearch] = useState("");
+  const [render, setRender] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,11 +28,15 @@ export default function Page() {
       });
       setLoading(false);
 
-      setCategories((prev) => [...prev, response.data.data]);
+      setRender((prev) => !prev);
 
       setKategori("");
 
-      alert("Berhasil menambahkan data!");
+      SwalTopEnd({
+        icon: "success",
+        title: "Sukses!",
+        text: "Berhasil menambahkan data!",
+      });
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -46,7 +52,11 @@ export default function Page() {
           kategori: kategori.kategori,
         }
       );
-      alert("berhasil update");
+      SwalTopEnd({
+        icon: "success",
+        title: "Sukses!",
+        text: "Berhasil mengedit Kategori!",
+      });
       const filteredKategori = categories.filter(
         (data) => data.id === kategori.id
       );
@@ -62,11 +72,19 @@ export default function Page() {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(BASE_URL + "/kategori/delete/" + id);
-      alert("Berhasil menghapus data!");
+      SwalTopEnd({
+        icon: "success",
+        title: "Sukses!",
+        text: "Berhasil menghapus Kategori!",
+      });
       setCategories((prev) => prev.filter((data) => data.id !== id));
     } catch (error) {
       console.log(error);
-      alert("Gagal menghapus data!");
+      SwalTopEnd({
+        icon: "error",
+        title: "Gagal!",
+        text: "Gagal menghapus Kategori!",
+      });
     }
   };
 

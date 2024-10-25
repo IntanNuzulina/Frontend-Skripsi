@@ -1,6 +1,7 @@
 import { BASE_URL } from "@/utils/config";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { SwalTopEnd } from "@/components/MySwal";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
@@ -38,7 +39,11 @@ const useAuth = () => {
       if (response.data.status) {
         localStorage.removeItem("alhikmah-token");
         setUser(null);
-        alert("Berhasil Logout!");
+        SwalTopEnd({
+          title: "Success!",
+          icon: "success",
+          text: "Berhasil Logout!",
+        });
       }
       return response.data;
     } catch (error) {
