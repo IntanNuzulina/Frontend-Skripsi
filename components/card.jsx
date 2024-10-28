@@ -10,10 +10,12 @@ export default function Card({ product, button }) {
   };
   return (
     <div className="card card-compact  rounded-tl-lg lg:mx-4 bg-base-100 shadow-xl relatif lg:w-[180px] w-[150px] my-2 transform transition-transform duration-300 hover:scale-95 mx-3">
-      {new Date(product?.flashsale?.tanggal_akhir) >= new Date() && (
+      {new Date(product?.flashsale?.tanggal_akhir) >= new Date() ? (
         <div className="absolute left-0 top-0 bg-red-500 px-3 py-2 text-white rounded-br-lg rounded-tl-lg ">
           {product?.flashsale?.diskon}%
         </div>
+      ) : (
+        <></>
       )}
       <figure>
         <img
