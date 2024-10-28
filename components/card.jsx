@@ -1,3 +1,5 @@
+"use client";
+
 import { IMAGE_URL } from "@/utils/config";
 
 export default function Card({ product, button }) {
