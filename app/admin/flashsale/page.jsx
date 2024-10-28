@@ -48,8 +48,10 @@ export default function Page() {
         const response = await axios.get(BASE_URL + "/flash-sale");
         setFlashSale(response.data.data);
         setFilteredFlashSale(response.data.data);
+        console.log(response.data.data);
       } catch (error) {
         console.log(error);
+        setFlashSale([]);
       }
     };
     fetchData();
@@ -204,7 +206,7 @@ export default function Page() {
             </thead>
             <tbody className="text-center">
               {/* row 1 */}
-              {flashSale.length && (
+              {flashSale.length > 0 && (
                 <>
                   {filteredFlashSale.map((data, index) => (
                     <tr key={index}>

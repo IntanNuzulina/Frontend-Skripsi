@@ -47,16 +47,7 @@ export default function Flashsale() {
                     {index < 6 && (
                       <>
                         <Link href={`/books/detail/${product.id}`}>
-                          <Card
-                            image={product.image}
-                            title={product.judul}
-                            publisher={product.penerbit}
-                            price={product.harga}
-                            stock={product.stok}
-                            tanggal_akhir={product?.flashsale?.tanggal_akhir}
-                            diskon={product?.flashsale?.diskon}
-                            button={"Beli Sekarang"}
-                          />
+                          <Card product={product} button={"Beli Sekarang"} />
                         </Link>
                       </>
                     )}

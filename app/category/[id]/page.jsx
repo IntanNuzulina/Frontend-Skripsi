@@ -21,15 +21,7 @@ export default async function KategoriPage({ params }) {
           {products.data.map((product, index) => (
             <>
               <Link href={`/books/detail/${product.id}`}>
-                <Card
-                  key={index}
-                  image={product.image}
-                  title={product.judul}
-                  publisher={product.penerbit}
-                  price={product.harga}
-                  stock={product.stok}
-                  button={"Lihat Detail"}
-                />
+                <Card key={index} product={product} button={"Lihat Detail"} />
               </Link>
             </>
           ))}

@@ -48,14 +48,7 @@ export default function SearchPage() {
             <div className="flex gap-4 my-3">
               {books.map((product, index) => (
                 <Link href={`/books/detail/${product.id}`} key={index}>
-                  <Card
-                    image={product.image}
-                    title={product.judul}
-                    publisher={product.penerbit}
-                    price={product.harga}
-                    stock={product.stok}
-                    button={"Lihat Detail"}
-                  />
+                  <Card product={product} button={"Lihat Detail"} />
                 </Link>
               ))}
             </div>

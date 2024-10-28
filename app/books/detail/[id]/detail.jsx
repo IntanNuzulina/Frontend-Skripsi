@@ -58,8 +58,6 @@ export default function DetailProduct({ products }) {
 
     document.body.appendChild(scriptTag);
 
-    console.log(new Date(products?.flashsale?.tanggal_akhir) >= new Date());
-
     return () => {
       document.body.removeChild(scriptTag);
     };

@@ -23,15 +23,7 @@ export default async function Products() {
                   <Link href={`/books/detail/${product.id}`}>
                     <Card
                       key={index}
-                      image={product.image}
-                      title={product.judul}
-                      publisher={product.penerbit}
-                      price={product.harga}
-                      stock={product.stok}
-                      diskon={
-                        new Date(product?.flashsale?.tanggal_akhir) >=
-                          new Date() && product?.flashsale?.diskon
-                      }
+                      product={product}
                       button={"Lihat Detail"}
                     />
                   </Link>

@@ -17,14 +17,7 @@ export default async function Page() {
             <div key={index}>
               {product?.flashsale?.tanggal_akhir !== "0000-00-00 00:00:00" && (
                 <>
-                  <Card
-                    image={product.image}
-                    title={product.judul}
-                    publisher={product.penerbit}
-                    price={product.harga}
-                    stock={product.stok}
-                    button={"Beli Sekarang"}
-                  />
+                  <Card product={product} button={"Beli Sekarang"} />
                 </>
               )}
             </div>
