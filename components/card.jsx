@@ -1,6 +1,7 @@
 import { IMAGE_URL } from "@/utils/config";
 
 export default function Card({ product, button }) {
+  console.log(product?.flashsale?.tanggal_akhir);
   const formatRupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
