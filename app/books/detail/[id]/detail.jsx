@@ -89,9 +89,9 @@ export default function DetailProduct({ products }) {
               <table className="w-full">
                 <tbody>
                   <tr>
-                    <td className="w-[130px]">Jumlah Halaman</td>
+                    <td className="w-[130px]"> Pengarang</td>
                     <td className="px-1">:</td>
-                    <td>{products.halaman}</td>
+                    <td>{products.penulis}</td>
                   </tr>
                   <tr>
                     <td className="w-[130px]">Penerbit</td>
@@ -99,14 +99,24 @@ export default function DetailProduct({ products }) {
                     <td>{products.penerbit}</td>
                   </tr>
                   <tr>
+                    <td className="w-[130px]">ISBN</td>
+                    <td className="px-1">:</td>
+                    <td>{products.isbn}</td>
+                  </tr>
+                  <tr>
                     <td className="w-[130px]">Tahun Terbit</td>
                     <td className="px-1">:</td>
                     <td>{products.thn_terbit}</td>
                   </tr>
                   <tr>
-                    <td className="w-[130px]">ISBN</td>
+                    <td className="w-[130px]">Jumlah Halaman</td>
                     <td className="px-1">:</td>
-                    <td>{products.isbn}</td>
+                    <td>{products.halaman} Lembar</td>
+                  </tr>
+                  <tr>
+                    <td className="w-[130px]">Kategori</td>
+                    <td className="px-1">:</td>
+                    <td>{products.kategori.kategori}</td>
                   </tr>
                 </tbody>
               </table>
