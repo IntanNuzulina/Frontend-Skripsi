@@ -39,6 +39,21 @@ export default function Page() {
       });
     } catch (error) {
       console.log(error);
+      if (error.response && error.response.status === 500) {
+        // jika gagal menambahkan buku
+        SwalTopEnd({
+          title: "error!",
+          icon: "error",
+          text: "Gagal Menambahkan Kategori",
+        });
+      } else {
+        // jika buku sudah ada
+        SwalTopEnd({
+          title: "Warning!",
+          icon: "error",
+          text: "Kategori ini sudah ada!",
+        });
+      }
       setLoading(false);
     }
   };

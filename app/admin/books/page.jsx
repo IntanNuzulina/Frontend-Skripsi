@@ -85,11 +85,22 @@ export default function Page() {
       });
     } catch (error) {
       console.log(error);
-      SwalTopEnd({
-        title: "Gagal!",
-        icon: "error",
-        text: "Gagal menambahkan Buku!",
-      });
+      if (error.response && error.response.status === 500) {
+        // Buku sudah ada
+        SwalTopEnd({
+          title: "Warning!",
+          icon: "error",
+          text: "Buku ini sudah ada.",
+        });
+      } else {
+        // Pesan error umum
+        SwalTopEnd({
+          title: "Gagal!",
+          icon: "error",
+          text: "Gagal menambahkan Buku!",
+        });
+      }
+
       setLoading(false);
     }
   };
