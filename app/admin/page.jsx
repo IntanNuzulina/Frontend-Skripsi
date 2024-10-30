@@ -128,11 +128,11 @@ export default async function Page() {
                     <td>{order.harga}</td>
                     <td>
                       {order.status === "unpaid" ? (
-                        <span className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
+                        <span className="mx-auto w-14 h-7 block rounded-lg text-xs mb-1 text-white  bg-red-500  hover:bg-red-600">
                           {order.status}
                         </span>
                       ) : (
-                        <span className="mx-auto w-12 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
+                        <span className="mx-auto w-14 h-7 block rounded-lg text-xs mb-1 text-white bg-green-600  hover:bg-green-700">
                           {order.status}
                         </span>
                       )}

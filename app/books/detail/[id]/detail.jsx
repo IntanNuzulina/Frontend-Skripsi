@@ -86,7 +86,7 @@ export default function DetailProduct({ products }) {
             <h2 className="mt-4 font-bold text-xl mb-1">Detail Buku</h2>
             <p className="border-b-2 w-[200px] mb-2"></p>
             <div>
-              <table className="w-full">
+              <table style={{ width: "800px" }}>
                 <tbody>
                   <tr>
                     <td className="w-[130px]"> Pengarang</td>
