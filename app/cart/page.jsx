@@ -81,7 +81,13 @@ export default function Page() {
       console.log(error);
     }
   };
-
+  const formatRupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0, // Jika ingin tanpa desimal
+    }).format(number);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -161,8 +167,8 @@ export default function Page() {
                       <td>
                         <span className="font-bold">{item.qty}</span>
                       </td>
-                      <td>Rp. {item.buku.harga}</td>
-                      <td>Rp. {item.total_harga}</td>
+                      <td> {formatRupiah(item.buku.harga)}</td>
+                      <td>{formatRupiah(item.total_harga)}</td>
                       <th className="bg-slate-300">
                         <span>
                           {" "}
