@@ -159,7 +159,7 @@ export default function Page() {
                       </th>
                       <td>
                         <div className="flex items-center gap-3">
-                          <div className="font-bold mx-auto">
+                          <div className="font-bold mx-auto ">
                             {item.buku.judul}
                           </div>
                         </div>

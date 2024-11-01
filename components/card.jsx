@@ -28,7 +28,7 @@ export default function Card({ product, button }) {
         />
       </figure>
       <div className=" h-[150px] justify-between border-1 border-red-500">
-        <h2 className="text-center text-base font-bold mb-3 mt-2 text-gray-700">
+        <h2 className="text-center text-base font-bold mb-3 mt-2 text-gray-700 line-clamp-1">
           {product?.judul}
         </h2>
         <h4 className="my-0 ml-4 text-sm text-gray-800">{product?.penerbit}</h4>

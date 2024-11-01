@@ -17,7 +17,7 @@ export default async function Category() {
   return (
     <div className="mt-10 mx-8 border-b-2 pb-8">
       <Title name={"Category"} sub={"By Category"} />
-      <div className="flex gap-2 mt-3">
+      <div className="mt-3">
         <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-2  gap-4 lg:gap-2">
           {categories && (
             <>
