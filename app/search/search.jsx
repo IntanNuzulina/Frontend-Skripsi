@@ -25,7 +25,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <div className="h-screen my-5 mx-5">
+      <div className="h-screen my-5 mx-8">
         {books.length === 0 ? (
           <>
             <h1 className="text-lg ml-5 text-blue-900">
@@ -45,12 +45,14 @@ export default function SearchPage() {
               <span className="font-bold italic"> &quot;{search}&quot;</span>{" "}
               <p className="mt-1 w-[350px] border-b-2 border-gray-200"></p>
             </h1>
-            <div className="flex gap-4 my-3">
-              {books.map((product, index) => (
-                <Link href={`/books/detail/${product.id}`} key={index}>
-                  <Card product={product} button={"Lihat Detail"} />
-                </Link>
-              ))}
+            <div className="flex my-3">
+              <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-2">
+                {books.map((product, index) => (
+                  <Link href={`/books/detail/${product.id}`} key={index}>
+                    <Card product={product} button={"Lihat Detail"} />
+                  </Link>
+                ))}
+              </div>
             </div>
           </>
         )}

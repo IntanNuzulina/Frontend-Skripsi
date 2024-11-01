@@ -17,18 +17,8 @@ export default function Page() {
         berusia 37 tahun. dalam operasional toko Al Hikmah, Pak Ridha dibantu
         oleh 3 karyawannya. Al Hikmah berhasil menarik perhatian dan kepercayaan
         pelanggan, beberapa faktor yang mempengaruhi hal tersebut adalah
-        <div>
-          1. Pelayanan Yang Ramah
-          <img src="" alt="" />
-        </div>
-        <div>
-          2. Harga Yang Terjangkau
-          <img
-            src="/images/diskon.png"
-            className="w-80 h-auto rounded-3xl"
-            alt=""
-          />
-        </div>
+        <div>1. Pelayanan Yang Ramah</div>
+        <div>2. Harga Yang Terjangkau</div>
         Dengan Faktor-faktor tersebut toko Al Hikmah Memperoleh Tempat Istimewa
         di hati para Pelanggan.
         <h2 className="mt-3 font-bold">Tujuan</h2>

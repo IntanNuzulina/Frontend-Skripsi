@@ -16,27 +16,15 @@ export default async function Category() {
   return (
     <>
       <Navbar />
-      <div className="mt-8 mx-8 border-b-2 pb-8">
-        <label className="input input-bordered flex  items-center gap-2 w-[300px]  h-10 my-5 mx-auto ">
-          <input
-            type="text"
-            className="grow text-sm"
-            placeholder="Cari Kategori..."
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="w-4 h-4 opacity-50"
-          >
-            <path
-              fillRule="evenodd"
-              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </label>
-        <div className="flex gap-2 mt-3 mx-auto">
+      <div className="mt-6 mx-8 border-b-2 pb-8">
+        <div className="flex items-center justify-center my-4">
+          <hr className="w-1/3 border-t-2 border-blue-900" />
+          <p className="mx-4 text-center text-blue-900 font-semibold text-lg md:text-xl lg:text-xl">
+            Semua Kategori
+          </p>
+          <hr className="w-1/3 border-t-2 border-blue-900" />
+        </div>
+        <div className="mt-5 mx-auto">
           <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-2  gap-4 lg:gap-2">
             {categories && (
               <>

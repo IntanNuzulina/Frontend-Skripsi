@@ -1,29 +1,62 @@
+"use client";
+
 import Card from "@/components/card";
-import Navbar from "@/components/navbar";
+import Title from "@/components/title";
+
+import CountDown from "@/components/countDown";
+import Link from "next/link";
 import { BASE_URL } from "@/utils/config";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Navbar from "@/components/navbar";
 
-export default async function Page() {
-  const productsFlashsale = await fetch(BASE_URL + "/buku/view");
+export default function Flashsale() {
+  const [products, setProducts] = useState([]);
+  const [flashsale, setFlashsale] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseFlashsale = await axios.get(
+          BASE_URL + "/buku/view?flashsale"
+        );
+        const responseDataFlashsale = await axios.get(BASE_URL + "/flash-sale");
+        setProducts(responseFlashsale.data.data);
+        setFlashsale(responseDataFlashsale.data.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const datas = await productsFlashsale.json();
-  const products = await datas.data;
+  if (!loading && new Date(flashsale[0]?.tanggal_akhir) >= new Date()) {
+    return (
+      <>
+        <Navbar />
+        <div className="mt-8 mx-8 border-b-2">
+          <div className="flex gap-2 mt-3">
+            <Title name={"Flashsale"} sub={"Today's"} />
+            <CountDown flashsale={flashsale} />
+          </div>
 
-  return (
-    <>
-      <Navbar />
-      <div className="mt-8 mx-8 border-b-2">
-        <div className="flex  mt-3">
-          {products.map((product, index) => (
-            <div key={index}>
-              {product?.flashsale?.tanggal_akhir !== "0000-00-00 00:00:00" && (
-                <>
-                  <Card product={product} button={"Beli Sekarang"} />
-                </>
-              )}
+          <div className="flex  mt-4">
+            <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-2">
+              {products.map((product, index) => (
+                <div key={index}>
+                  {product.flashsale.tanggal_akhir !==
+                    "0000-00-00 00:00:00" && (
+                    <Link href={`/books/detail/${product.id}`}>
+                      <Card product={product} button={"Beli Sekarang"} />
+                    </Link>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
