@@ -85,7 +85,7 @@ export default function Page() {
       });
     } catch (error) {
       console.log(error);
-      if (error.response && error.response.status === 500) {
+      if (error.response && error.response.status === 409) {
         // Buku sudah ada
         SwalTopEnd({
           title: "Warning!",

@@ -20,7 +20,7 @@ export default async function Page() {
           </p>
           <hr className="w-1/3 border-t-2 border-blue-900" />
         </div>
-        <div className="mx-auto w-[90%]">
+        <div className="lg:mx-auto lg:w-[90%]">
           <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-2">
             {products.data.map((product, index) => (
               <>

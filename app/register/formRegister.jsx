@@ -44,13 +44,21 @@ export default function FormRegister() {
         router.push("/login");
       }
     } catch (error) {
-      console.log(error.response.data.errors);
-      setError(error?.response?.data?.errors);
-      SwalTopEnd({
-        title: "Error!",
-        icon: "error",
-        text: error?.response?.data?.message,
-      });
+      console.log(error);
+      if (error?.response?.status !== 500) {
+        setError(error?.response?.data?.errors);
+        SwalTopEnd({
+          title: "Error!",
+          icon: "error",
+          text: error?.response?.data?.message,
+        });
+      } else {
+        SwalTopEnd({
+          title: "Error!",
+          icon: "error",
+          text: "Server Error, input terlalu banyak",
+        });
+      }
     }
   };
 
