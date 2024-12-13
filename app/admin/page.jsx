@@ -35,6 +35,8 @@ async function FetchData() {
 export default async function Page() {
   const [books, users, orders] = await FetchData();
 
+  console.log(orders);
+
   return (
     <>
       <div className="w-full h-[70px] sticky top-0 z-50 bg-white shadow-md shadow-slate-300 ">
@@ -97,7 +99,7 @@ export default async function Page() {
           {/* head */}
           <thead className="bg-slate-100">
             <tr className="border-none">
-              <th colSpan={8}>
+              <th colSpan={9}>
                 <input
                   type="text"
                   placeholder="cari..."
@@ -112,6 +114,8 @@ export default async function Page() {
               <th>Jumlah</th>
               <th>Alamat</th>
               <th>Total</th>
+              <th>Tanggal Order</th>
+              <th>Total Harga</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -125,6 +129,14 @@ export default async function Page() {
                     <td>{order.buku.judul}</td>
                     <td>{order.qty}</td>
                     <td>{order.alamat_penerima}</td>
+                    <td>{order.total}</td>
+                    <td>
+                      {new Date(order.created_at).toLocaleString("id-ID", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </td>
                     <td>{order.harga}</td>
                     <td>
                       {order.status === "unpaid" ? (
